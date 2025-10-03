@@ -1,0 +1,18 @@
+There are event files in the /events directory, these are text from the whole facebook event page. These are mostly running/cycling/swimming  events. The filename is in the <eventId>.txt format. I want you to go through each of the files in the /events directory and extract these info for each file:
+
+name: name of the event
+date: the date of the event
+distance: the distance of the event, should be just the number in kilometers, for example: 21.1, 10, 5
+location: comma seperated location of the event
+fee: the fee of the event
+earlyBirdFee: the early bird fee of the event
+website: the website of the event
+tags: comma seperated tags for the event, for example: AIMS if the event is AIMS certified
+responseCount: the number of people responded to the event
+fbLink: the facebook link of the event
+
+Then save all these in a json `events.json`. If there are multiple distances in a event, create entry for each distance. Append the distance to the name of the event, for example:  `SHERPUR HALF MARATHON 2025 | 10k`. Note that fees are usually different for different distances, so make sure to extract the correct fee for each distance. Put null if you can't find any of the info.
+
+You can't use any scripts, you have to read each of them. After reading each of the file you should update the json file.
+
+Read the existing `events.json` file and append new events to it. You can skip reading an event file if its eventId is already in the `events.json` file.
