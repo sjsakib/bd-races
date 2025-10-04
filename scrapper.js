@@ -103,7 +103,10 @@ const eventLinks = [
   await browser.close();
 
   // Save results to JSON
-  fs.writeFileSync("facebook_events.json", JSON.stringify(results, null, 2));
+  fs.writeFileSync(
+    "./raw_events/facebook_events.json",
+    JSON.stringify(results, null, 2),
+  );
 
   console.log("Done! Results saved to facebook_events.csv");
 })();

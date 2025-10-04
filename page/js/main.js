@@ -36,6 +36,37 @@ async function loadEvents() {
 
 // Populate filter dropdowns with unique values
 function populateFilterOptions() {
+  // Populate distances dynamically from events data
+  const distances = [
+    ...new Set(
+      allEvents
+        .map((event) => event.distance)
+        .filter((distance) => distance !== null && distance !== undefined),
+    ),
+  ].sort((a, b) => a - b);
+
+  const distanceFilter = document.getElementById("distanceFilter");
+  // Clear existing options except "All Distances"
+  distanceFilter.innerHTML = '<option value="">All Distances</option>';
+
+  distances.forEach((distance) => {
+    const option = document.createElement("option");
+    option.value = distance;
+
+    // Format distance display with special labels for common distances
+    let displayText;
+    if (distance === 21.1) {
+      displayText = `Half Marathon (${distance}K)`;
+    } else if (distance === 42.2) {
+      displayText = `Marathon (${distance}K)`;
+    } else {
+      displayText = `${distance}K`;
+    }
+
+    option.textContent = displayText;
+    distanceFilter.appendChild(option);
+  });
+
   // Populate locations
   const locations = [
     ...new Set(
@@ -145,11 +176,11 @@ function displayEvents(events) {
 
 // Format fee display
 function formatFee(fee, earlyBirdFee) {
-  if (!fee && !earlyBirdFee) return "Fee Unknown";
+  if (!fee && !earlyBirdFee) return "Unknown";
   if (earlyBirdFee && fee) return `৳${earlyBirdFee} (Early) / ৳${fee}`;
   if (fee) return `৳${fee}`;
   if (earlyBirdFee) return `৳${earlyBirdFee} (Early Bird)`;
-  return "Fee Unknown";
+  return "Unknown";
 }
 
 // Update event count
