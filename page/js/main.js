@@ -71,7 +71,10 @@ function populateFilterOptions() {
   const locations = [
     ...new Set(
       allEvents
-        .map((event) => event.location?.split(",")[0]?.trim())
+        .map((event) => {
+          const locationParts = event.location?.split(",");
+          return locationParts?.[locationParts.length - 1]?.trim();
+        })
         .filter(Boolean),
     ),
   ].sort();
@@ -312,8 +315,13 @@ function filterEvents() {
     }
 
     // Location filter
-    if (locationFilter && !event.location?.includes(locationFilter)) {
-      return false;
+    if (locationFilter) {
+      const locationParts = event.location?.split(",");
+      const lastLocationPart =
+        locationParts?.[locationParts.length - 1]?.trim();
+      if (!lastLocationPart || lastLocationPart !== locationFilter) {
+        return false;
+      }
     }
 
     // Tag filter
