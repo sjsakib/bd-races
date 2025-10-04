@@ -1,4 +1,9 @@
 :root {
+    /* iOS safe area support */
+    --safe-area-top: env(safe-area-inset-top);
+    --safe-area-bottom: env(safe-area-inset-bottom);
+    --safe-area-left: env(safe-area-inset-left);
+    --safe-area-right: env(safe-area-inset-right);
     /* Colors */
     --primary-50: #eff6ff;
     --primary-100: #dbeafe;
@@ -512,13 +517,19 @@ body {
         bottom: 0;
         z-index: 1000;
         background: white;
-        overflow-y: scroll;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        padding: 20px 20px 100px 20px;
+        padding: calc(20px + var(--safe-area-top))
+            calc(20px + var(--safe-area-right))
+            calc(120px + var(--safe-area-bottom))
+            calc(20px + var(--safe-area-left));
         transform: translateX(-100%);
         transition: transform 0.3s ease;
-        height: 100%;
+        height: 100vh;
+        height: 100dvh;
         overscroll-behavior: contain;
+        scroll-behavior: smooth;
+        touch-action: pan-y;
     }
 
     .sidebar.mobile-open {
@@ -578,9 +589,13 @@ body {
     }
 
     .sidebar {
-        padding: var(--space-3) var(--space-3) var(--space-12) var(--space-3);
-        height: 100%;
-        overflow-y: scroll;
+        padding: calc(var(--space-3) + var(--safe-area-top))
+            calc(var(--space-3) + var(--safe-area-right))
+            calc(200px + var(--safe-area-bottom))
+            calc(var(--space-3) + var(--safe-area-left));
+        height: 100vh;
+        height: 100dvh;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         overscroll-behavior: contain;
         position: fixed;
@@ -588,6 +603,10 @@ body {
         left: 0;
         right: 0;
         bottom: 0;
+        scroll-behavior: smooth;
+        touch-action: pan-y;
+        max-height: 100vh;
+        max-height: 100dvh;
     }
 
     .mobile-menu-toggle {
@@ -648,4 +667,53 @@ body {
 .icon-lg {
     width: 22px;
     height: 22px;
+}
+
+/* Additional mobile scrolling fixes */
+@media (max-width: 1024px) {
+    .sidebar .filters {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 120px);
+        height: calc(100dvh - 120px);
+        overflow: hidden;
+    }
+
+    .sidebar .filters-grid {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-right: var(--space-2);
+        margin-right: calc(-1 * var(--space-2));
+        padding-bottom: var(--space-4);
+    }
+
+    .sidebar .stats {
+        flex-shrink: 0;
+        background: white;
+        border-top: 2px solid var(--gray-200);
+        margin-top: 0;
+        padding-top: var(--space-4);
+        padding-bottom: calc(var(--space-4) + 20px);
+        position: relative;
+        z-index: 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar .filters {
+        height: calc(
+            100vh - var(--safe-area-top) - var(--safe-area-bottom) - 80px
+        );
+        height: calc(
+            100dvh - var(--safe-area-top) - var(--safe-area-bottom) - 80px
+        );
+    }
+}
+
+/* Fix for very small screens */
+@media (max-width: 480px) {
+    .sidebar {
+        padding-bottom: calc(250px + var(--safe-area-bottom)) !important;
+    }
 }
