@@ -66,6 +66,8 @@ const existingLinks = [
   "https://www.facebook.com/events/922324983164455/",
   "https://www.facebook.com/events/969843514710713/",
   "https://www.facebook.com/events/990306433290594/",
+  "https://www.facebook.com/events/1874907930090863/",
+  "https://www.facebook.com/events/2197453854065800/",
 ];
 
 (async function () {

@@ -3,7 +3,7 @@ There are event files in the /events directory, these are text from the whole fa
 name: name of the event
 date: the date of the event
 distance: the distance of the event, should be just the number in kilometers, for example: 21.1, 10, 5
-location: comma seperated location of the event
+location: comma seperated location of the event, Bangladesh should be ommited from the location, for example instead of Dhaka, Bangladesh it should be just Dhaka
 fee: the fee of the event
 earlyBirdFee: the early bird fee of the event
 website: the website of the event

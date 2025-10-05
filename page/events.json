@@ -1101,5 +1101,17 @@
     "website": "https://register.run-bangla.com/",
     "tags": "Running",
     "fbLink": null
+  },
+  {
+    "name": "Run for Mental Wellbeing | 5k",
+    "date": "11 Oct 2025",
+    "distance": 5,
+    "location": "National Institute of Mental Health, Sher-e-Bangla Nagar, Dhaka, Bangladesh",
+    "fee": "300",
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Fun Run, Mental Health",
+    "responseCount": 522,
+    "fbLink": "https://www.facebook.com/events/1874907930090863"
   }
 ]
