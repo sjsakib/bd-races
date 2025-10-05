@@ -98,6 +98,51 @@ function populateFilterOptions() {
     option.textContent = tag;
     tagFilter.appendChild(option);
   });
+
+  // Populate date filter
+  populateDateFilter();
+}
+
+function populateDateFilter() {
+  const dateFilter = document.getElementById("dateFilter");
+  const now = new Date();
+  const currentMonth = now.getMonth();
+  const currentYear = now.getFullYear();
+
+  // Generate month names
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  // Add options for current month + next 5 months (6 months total)
+  for (let i = 0; i < 6; i++) {
+    const targetMonth = (currentMonth + i) % 12;
+    const targetYear = currentYear + Math.floor((currentMonth + i) / 12);
+    const monthValue = `${targetYear}-${String(targetMonth + 1).padStart(2, "0")}`;
+    const monthLabel = monthNames[targetMonth];
+
+    const option = document.createElement("option");
+    option.value = monthValue;
+    option.textContent = monthLabel;
+    dateFilter.appendChild(option);
+  }
+
+  // Add "Later" option for events beyond the 6-month window
+  const laterOption = document.createElement("option");
+  laterOption.value = "later";
+  laterOption.textContent = "Later";
+  dateFilter.appendChild(laterOption);
 }
 
 // Display events in the grid
@@ -264,8 +309,7 @@ function filterEvents() {
   const feeFilter = document.getElementById("feeFilter").value;
   const locationFilter = document.getElementById("locationFilter").value;
   const tagFilter = document.getElementById("tagFilter").value;
-  const dateFromFilter = document.getElementById("dateFromFilter").value;
-  const dateToFilter = document.getElementById("dateToFilter").value;
+  const dateFilter = document.getElementById("dateFilter").value;
 
   filteredEvents = allEvents.filter((event) => {
     // Filter out past events - only show current and future events
@@ -329,21 +373,29 @@ function filterEvents() {
       return false;
     }
 
-    // Date range filter
-    if (dateFromFilter || dateToFilter) {
+    // Date filter
+    if (dateFilter) {
       const eventDate = parseEventDate(event.date);
       if (!eventDate || isNaN(eventDate)) return false;
 
-      if (dateFromFilter) {
-        const fromDate = new Date(dateFromFilter);
-        if (eventDate < fromDate) return false;
-      }
+      if (dateFilter === "later") {
+        // Show events beyond the 6-month window
+        const now = new Date();
+        const sixMonthsFromNow = new Date(
+          now.getFullYear(),
+          now.getMonth() + 6,
+          1,
+        );
+        if (eventDate < sixMonthsFromNow) return false;
+      } else {
+        // Filter by specific month (format: YYYY-MM)
+        const [filterYear, filterMonth] = dateFilter.split("-").map(Number);
+        const eventYear = eventDate.getFullYear();
+        const eventMonth = eventDate.getMonth() + 1; // getMonth() is 0-based
 
-      if (dateToFilter) {
-        const toDate = new Date(dateToFilter);
-        // Set to end of day to include events on the to date
-        toDate.setHours(23, 59, 59, 999);
-        if (eventDate > toDate) return false;
+        if (eventYear !== filterYear || eventMonth !== filterMonth) {
+          return false;
+        }
       }
     }
 
@@ -370,8 +422,7 @@ function clearAllFilters() {
   document.getElementById("feeFilter").value = "";
   document.getElementById("locationFilter").value = "";
   document.getElementById("tagFilter").value = "";
-  document.getElementById("dateFromFilter").value = "";
-  document.getElementById("dateToFilter").value = "";
+  document.getElementById("dateFilter").value = "";
 
   // Sort events by date from most recent to oldest
   displayEvents(allEvents);
@@ -489,10 +540,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("change", filterEvents);
   document.getElementById("tagFilter").addEventListener("change", filterEvents);
   document
-    .getElementById("dateFromFilter")
-    .addEventListener("change", filterEvents);
-  document
-    .getElementById("dateToFilter")
+    .getElementById("dateFilter")
     .addEventListener("change", filterEvents);
 
   // Load events
