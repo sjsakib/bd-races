@@ -37,23 +37,24 @@
 
             <div class="main-content">
                 <div class="sidebar" id="filterSidebar">
-                    <button
-                        class="sidebar-close"
-                        onclick="closeMobileFilters()"
-                        title="Close Filters"
-                    >
-                        <svg class="icon icon-lg" viewBox="0 0 24 24">
-                            <path
-                                d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 0 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"
-                            />
-                        </svg>
-                    </button>
-
                     <div class="filters">
-                        <h3>
-                            <span style="margin-right: 8px">🔍</span>Search &
-                            Filters
-                        </h3>
+                        <div class="filters-header">
+                            <h3>
+                                <span style="margin-right: 8px">🔍</span>Search
+                                & Filters
+                            </h3>
+                            <button
+                                class="sidebar-close"
+                                onclick="closeMobileFilters()"
+                                title="Apply Filters"
+                            >
+                                <svg class="icon icon-lg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
 
                         <div class="filters-grid">
                             <div class="filter-group">
@@ -110,24 +111,51 @@
                                     <!-- Options will be populated dynamically -->
                                 </select>
                             </div>
+
+                            <div class="filter-group">
+                                <label for="sortFilter">Sort By</label>
+                                <select id="sortFilter">
+                                    <option value="date">
+                                        Date (Earliest First)
+                                    </option>
+                                    <option value="responseCount">
+                                        Response Count (Highest First)
+                                    </option>
+                                    <option value="name">Name (A-Z)</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="stats">
                             <div class="event-count" id="eventCount">
                                 Loading events...
                             </div>
-                            <button
-                                class="clear-filters"
-                                onclick="clearAllFilters()"
-                                title="Clear All Filters"
-                            >
-                                <svg class="icon-sm" viewBox="0 0 24 24">
-                                    <path
-                                        d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
-                                    />
-                                </svg>
-                                Clear Filters
-                            </button>
+                            <div class="button-row">
+                                <button
+                                    class="clear-filters"
+                                    onclick="clearAllFilters()"
+                                    title="Clear All Filters"
+                                >
+                                    <svg class="icon-sm" viewBox="0 0 24 24">
+                                        <path
+                                            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                                        />
+                                    </svg>
+                                    Clear Filters
+                                </button>
+                                <button
+                                    class="copy-list-btn"
+                                    onclick="copyEventsToClipboard()"
+                                    title="Copy events list in LLM-friendly format"
+                                >
+                                    <svg class="icon-sm" viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+                                        />
+                                    </svg>
+                                    Copy List
+                                </button>
+                            </div>
                             <div style="margin-top: 32px; text-align: center">
                                 <a
                                     class="github-button"
@@ -151,6 +179,7 @@
             </div>
         </div>
         <script src="js/main.js"></script>
+        <script src="js/copy.js"></script>
         <!-- Place this tag in your head or just before your close body tag. -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
     </body>

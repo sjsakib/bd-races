@@ -16,14 +16,8 @@ async function loadEvents() {
       return eventDate >= today;
     });
 
-    // Sort events by date from earliest to latest
-    allEvents.sort((a, b) => {
-      const dateA = parseEventDate(a.date);
-      const dateB = parseEventDate(b.date);
-      if (!dateA || isNaN(dateA)) return 1;
-      if (!dateB || isNaN(dateB)) return -1;
-      return dateA - dateB; // Earliest first
-    });
+    // Sort events by date from earliest to latest (default sorting)
+    allEvents = sortEvents(allEvents, "date");
     populateFilterOptions();
     displayEvents(allEvents);
     updateEventCount(allEvents.length);
@@ -170,12 +164,18 @@ function displayEvents(events) {
                         ${event.distance ? event.distance + "K" : "Distance TBA"}
                     </div>
                     <div class="event-detail">
-                        <span class="detail-icon">📍</span>
-                        ${event.location || "Location TBA"}
-                    </div>
-                    <div class="event-detail">
                         <span class="detail-icon">💰</span>
                         ${formatFee(event.fee, event.earlyBirdFee)}
+                    </div>
+                    <div class="event-detail">
+                        <span class="detail-icon">👥</span>
+                        ${event.responseCount ? event.responseCount + " responses" : "No responses yet"}
+                    </div>
+                </div>
+                <div class="event-location-row">
+                    <div class="event-detail event-location">
+                        <span class="detail-icon">📍</span>
+                        ${event.location || "Location TBA"}
                     </div>
                 </div>
                 ${
@@ -302,6 +302,29 @@ function parseEventDate(dateString) {
   return new Date(workingDate);
 }
 
+// Sort events based on selected sort option
+function sortEvents(events, sortBy) {
+  switch (sortBy) {
+    case "responseCount":
+      return events.sort((a, b) => {
+        const countA = a.responseCount || 0;
+        const countB = b.responseCount || 0;
+        return countB - countA; // Highest first
+      });
+    case "name":
+      return events.sort((a, b) => a.name.localeCompare(b.name));
+    case "date":
+    default:
+      return events.sort((a, b) => {
+        const dateA = parseEventDate(a.date);
+        const dateB = parseEventDate(b.date);
+        if (!dateA || isNaN(dateA)) return 1;
+        if (!dateB || isNaN(dateB)) return -1;
+        return dateA - dateB; // Earliest first
+      });
+  }
+}
+
 // Filter events based on current filter values
 function filterEvents() {
   const searchTerm = document.getElementById("searchInput").value.toLowerCase();
@@ -310,6 +333,7 @@ function filterEvents() {
   const locationFilter = document.getElementById("locationFilter").value;
   const tagFilter = document.getElementById("tagFilter").value;
   const dateFilter = document.getElementById("dateFilter").value;
+  const sortFilter = document.getElementById("sortFilter").value;
 
   filteredEvents = allEvents.filter((event) => {
     // Filter out past events - only show current and future events
@@ -402,14 +426,8 @@ function filterEvents() {
     return true;
   });
 
-  // Sort filtered events by date from earliest to latest
-  filteredEvents.sort((a, b) => {
-    const dateA = parseEventDate(a.date);
-    const dateB = parseEventDate(b.date);
-    if (!dateA || isNaN(dateA)) return 1;
-    if (!dateB || isNaN(dateB)) return -1;
-    return dateA - dateB; // Earliest first
-  });
+  // Sort filtered events based on selected sort option
+  filteredEvents = sortEvents(filteredEvents, sortFilter);
 
   displayEvents(filteredEvents);
   updateEventCount(filteredEvents.length);
@@ -423,9 +441,11 @@ function clearAllFilters() {
   document.getElementById("locationFilter").value = "";
   document.getElementById("tagFilter").value = "";
   document.getElementById("dateFilter").value = "";
+  document.getElementById("sortFilter").value = "date";
 
-  // Sort events by date from most recent to oldest
-  displayEvents(allEvents);
+  // Sort events by date from earliest to latest (default sorting)
+  const sortedEvents = sortEvents([...allEvents], "date");
+  displayEvents(sortedEvents);
   updateEventCount(allEvents.length);
 }
 
@@ -444,8 +464,8 @@ function toggleMobileFilters() {
     document.body.style.width = "100%";
     document.body.style.height = "100%";
     toggleText.innerHTML =
-      '<svg class="icon" style="margin-right: 8px;" viewBox="0 0 24 24"><path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 0 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/></svg><span>Close</span>';
-    toggle.setAttribute("title", "Close Filters");
+      '<svg class="icon" style="margin-right: 8px;" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span>Apply</span>';
+    toggle.setAttribute("title", "Apply Filters");
     sidebar.style.display = "block";
 
     // Force redraw to ensure scrolling works properly
@@ -541,6 +561,9 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("tagFilter").addEventListener("change", filterEvents);
   document
     .getElementById("dateFilter")
+    .addEventListener("change", filterEvents);
+  document
+    .getElementById("sortFilter")
     .addEventListener("change", filterEvents);
 
   // Load events
