@@ -1,0 +1,47 @@
+[
+  {
+    "eventIndex": 11,
+    "eventName": "CUMILLA MARATHON 2025 | 42.195k",
+    "oldEventId": "555332594315963",
+    "newEventId": "788897559329643",
+    "oldLink": "https://www.facebook.com/events/555332594315963",
+    "newLink": "https://www.facebook.com/events/788897559329643",
+    "reason": "CUMILLA MARATHON content found in event 788897559329643"
+  },
+  {
+    "eventIndex": 12,
+    "eventName": "CUMILLA MARATHON 2025 | 21.0975k",
+    "oldEventId": "555332594315963",
+    "newEventId": "788897559329643",
+    "oldLink": "https://www.facebook.com/events/555332594315963",
+    "newLink": "https://www.facebook.com/events/788897559329643",
+    "reason": "CUMILLA MARATHON content found in event 788897559329643"
+  },
+  {
+    "eventIndex": 15,
+    "eventName": "CRC Mini Race 2025 | 2.1k",
+    "oldEventId": "575514851888090",
+    "newEventId": null,
+    "oldLink": "https://www.facebook.com/events/575514851888090",
+    "newLink": null,
+    "reason": "No matching Facebook event found for CRC Mini Race"
+  },
+  {
+    "eventIndex": 30,
+    "eventName": "SHERPUR HALF MARATHON 2025 | 21.1k",
+    "oldEventId": "788897559329643",
+    "newEventId": "575514851888090",
+    "oldLink": "https://www.facebook.com/events/788897559329643",
+    "newLink": "https://www.facebook.com/events/575514851888090",
+    "reason": "SHERPUR HALF MARATHON content should be in event 575514851888090"
+  },
+  {
+    "eventIndex": 52,
+    "eventName": "Bahadurpur Runners 10K Run( Mini Marathon 2025) | 10k",
+    "oldEventId": "1508440780167582",
+    "newEventId": "1124892606242993",
+    "oldLink": "https://www.facebook.com/events/1508440780167582",
+    "newLink": "https://www.facebook.com/events/1124892606242993",
+    "reason": "English event name should link to English Facebook event"
+  }
+]
