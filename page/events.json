@@ -1243,5 +1243,65 @@
     "tags": "Fun Run",
     "responseCount": 30,
     "fbLink": "https://www.facebook.com/events/754073907683174"
+  },
+  {
+    "name": "Bhawal Trail Ultra 2026 | 50k",
+    "date": "6 Feb 2026",
+    "distance": 50,
+    "location": "Nuhash Polli, Gazipur",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Trail Ultra, Running",
+    "responseCount": 142,
+    "fbLink": "https://www.facebook.com/events/1180304947491265"
+  },
+  {
+    "name": "Chunati.com Marathon 2025 (4th Edition) | 21.1k",
+    "date": "26 Dec 2025",
+    "distance": 21.1,
+    "location": "Ishak Mia Road, Chunati, Lohagara, Chattogram",
+    "fee": 1000,
+    "earlyBirdFee": null,
+    "website": "https://chunati.com/registration/",
+    "tags": "Half Marathon, Running",
+    "responseCount": 22,
+    "fbLink": "https://www.facebook.com/events/789231534016799"
+  },
+  {
+    "name": "Chunati.com Marathon 2025 (4th Edition) | 10k",
+    "date": "26 Dec 2025",
+    "distance": 10,
+    "location": "Ishak Mia Road, Chunati, Lohagara, Chattogram",
+    "fee": 900,
+    "earlyBirdFee": null,
+    "website": "https://chunati.com/registration/",
+    "tags": "Running",
+    "responseCount": 22,
+    "fbLink": "https://www.facebook.com/events/789231534016799"
+  },
+  {
+    "name": "Chunati.com Marathon 2025 (4th Edition) | 5k",
+    "date": "26 Dec 2025",
+    "distance": 5,
+    "location": "Ishak Mia Road, Chunati, Lohagara, Chattogram",
+    "fee": 600,
+    "earlyBirdFee": null,
+    "website": "https://chunati.com/registration/",
+    "tags": "Running",
+    "responseCount": 22,
+    "fbLink": "https://www.facebook.com/events/789231534016799"
+  },
+  {
+    "name": "Diabetes Day Run-2025 by BES | 7.5k",
+    "date": "14 Nov 2025",
+    "distance": 7.5,
+    "location": "Hatirjheel Amphitheatre, Dhaka",
+    "fee": 499,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Running, Health Awareness",
+    "responseCount": 692,
+    "fbLink": "https://www.facebook.com/events/813895684918436"
   }
 ]
