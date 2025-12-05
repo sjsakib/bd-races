@@ -1305,15 +1305,27 @@
     "fbLink": "https://www.facebook.com/events/754073907683174"
   },
   {
-    "name": "Bhawal Trail Ultra 2026 | 50k",
+    "name": "BHAWAL TRAIL ULTRA 2026 | 25k",
     "date": "6 Feb 2026",
-    "distance": 50,
+    "distance": 25,
     "location": "Nuhash Polli, Gazipur",
-    "fee": null,
+    "fee": 2599,
     "earlyBirdFee": null,
     "website": null,
     "tags": "Trail Ultra, Running",
-    "responseCount": 142,
+    "responseCount": 1100,
+    "fbLink": "https://www.facebook.com/events/1180304947491265"
+  },
+  {
+    "name": "BHAWAL TRAIL ULTRA 2026 | 50k",
+    "date": "6 Feb 2026",
+    "distance": 50,
+    "location": "Nuhash Polli, Gazipur",
+    "fee": 2999,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Trail Ultra, Running",
+    "responseCount": 1100,
     "fbLink": "https://www.facebook.com/events/1180304947491265"
   },
   {

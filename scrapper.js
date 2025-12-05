@@ -1,18 +1,7 @@
-const { chromium } = require("playwright");
-const fs = require("fs");
+const { chromium } = require('playwright');
+const fs = require('fs');
 
-const eventLinks = [
-  "https://www.facebook.com/events/4327873190767523/",
-  "https://www.facebook.com/events/813797948216188/",
-  "https://www.facebook.com/events/4270751369837883/",
-  "https://www.facebook.com/events/1466087721119205/",
-  "https://www.facebook.com/events/843141418464127/",
-  "https://www.facebook.com/events/2662673687426287/",
-  "https://www.facebook.com/events/1415830253475028/",
-  "https://www.facebook.com/events/874429415247810/",
-  "https://www.facebook.com/events/4201789890037762/"
-
-];
+const eventLinks = ['https://www.facebook.com/events/1180304947491265'];
 
 (async () => {
   const browser = await chromium.launch({ headless: false });
@@ -22,7 +11,7 @@ const eventLinks = [
 
   for (const link of eventLinks) {
     try {
-      await page.goto(link, { waitUntil: "domcontentloaded" });
+      await page.goto(link, { waitUntil: 'domcontentloaded' });
 
       // Wait for main content to load
       await page.waitForTimeout(3000);
@@ -35,7 +24,7 @@ const eventLinks = [
 
       const seeMoreButtons = page
         .locator('div[role="button"]')
-        .filter({ hasText: "See more" });
+        .filter({ hasText: 'See more' });
       const seeMoreCount = await seeMoreButtons.count();
       for (let i = 0; i < seeMoreCount; i++) {
         await seeMoreButtons
@@ -46,10 +35,10 @@ const eventLinks = [
       }
 
       // grab innter text of body
-      let pageText = await page.innerText("body");
+      let pageText = await page.innerText('body');
 
       // remove everyting after "Suggested Events"
-      pageText = pageText.split("Suggested events")[0];
+      pageText = pageText.split('Suggested events')[0];
 
       // Extract event title
       const title = await page.title();
@@ -71,10 +60,7 @@ const eventLinks = [
   await browser.close();
 
   // Save results to JSON
-  fs.writeFileSync(
-    "./raw_events/facebook_events.json",
-    JSON.stringify(results, null, 2),
-  );
+  fs.writeFileSync('./raw_events/facebook_events.json', JSON.stringify(results, null, 2));
 
-  console.log("Done! Results saved to facebook_events.csv");
+  console.log('Done! Results saved to facebook_events.csv');
 })();
