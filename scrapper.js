@@ -2,9 +2,16 @@ const { chromium } = require("playwright");
 const fs = require("fs");
 
 const eventLinks = [
-  "https://www.facebook.com/events/1889865724934564/",
-  "https://www.facebook.com/events/913844177217876/",
-  "https://www.facebook.com/events/4114741255449245/",
+  "https://www.facebook.com/events/4327873190767523/",
+  "https://www.facebook.com/events/813797948216188/",
+  "https://www.facebook.com/events/4270751369837883/",
+  "https://www.facebook.com/events/1466087721119205/",
+  "https://www.facebook.com/events/843141418464127/",
+  "https://www.facebook.com/events/2662673687426287/",
+  "https://www.facebook.com/events/1415830253475028/",
+  "https://www.facebook.com/events/874429415247810/",
+  "https://www.facebook.com/events/4201789890037762/"
+
 ];
 
 (async () => {
