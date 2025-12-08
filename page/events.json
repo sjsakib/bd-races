@@ -1519,5 +1519,29 @@
     "tags": "Community Run, Winter Run, Running",
     "responseCount": 39,
     "fbLink": "https://www.facebook.com/events/4201789890037762"
+  },
+  {
+    "name": "Dhaka Duathlon 2026",
+    "date": "6 Feb 2026",
+    "distance": null,
+    "location": "Hatirjheel, Dhaka",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Duathlon, Running, Cycling",
+    "responseCount": 3100,
+    "fbLink": "https://www.facebook.com/events/1325592405440805"
+  },
+  {
+    "name": "Bhatiary International Marathon 2026",
+    "date": "3 Jan 2026",
+    "distance": null,
+    "location": "Bangladesh Military Academy, Bhatiary, Chittagong",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Marathon, Half Marathon, Running, AIMS, International",
+    "responseCount": 2600,
+    "fbLink": "https://www.facebook.com/events/791618880302929"
   }
 ]
