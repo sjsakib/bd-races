@@ -1543,5 +1543,29 @@
     "tags": "Marathon, Half Marathon, Running, AIMS, International",
     "responseCount": 2600,
     "fbLink": "https://www.facebook.com/events/791618880302929"
+  },
+  {
+    "name": "BYLC Running with Purpose 2026 | 7.5k",
+    "date": "24 Apr 2026",
+    "distance": 7.5,
+    "location": "Hatirjheel, Dhaka",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Running, Youth, Health Awareness, SDG",
+    "responseCount": 727,
+    "fbLink": "https://www.facebook.com/events/865875089289213"
+  },
+  {
+    "name": "BYLC Running with Purpose 2026 | 15k",
+    "date": "24 Apr 2026",
+    "distance": 15,
+    "location": "Hatirjheel, Dhaka",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Running, Youth, Health Awareness, SDG",
+    "responseCount": 727,
+    "fbLink": "https://www.facebook.com/events/865875089289213"
   }
 ]

@@ -1,7 +1,7 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 
-const eventLinks = ["https://www.facebook.com/events/791618880302929"];
+const eventLinks = ["https://www.facebook.com/events/865875089289213"];
 
 (async () => {
   const browser = await chromium.launch({ headless: false });
