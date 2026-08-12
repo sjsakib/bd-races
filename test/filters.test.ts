@@ -4,7 +4,8 @@ import { describe, it } from "node:test";
 import {
   filterEvents,
   sortEvents,
-  DEFAULT_FILTERS,
+  buildDistanceScale,
+  defaultFilters,
   formatDistanceRange,
 } from "../web/src/filters.ts";
 import { filtersToSearch, parseFiltersFromSearch } from "../web/src/url-state.ts";
@@ -61,36 +62,46 @@ const events: EventRecord[] = [
   },
 ];
 
+const SCALE = buildDistanceScale(events);
+
 describe("filters and url state", () => {
   it("filters by search, city, and exact tag", () => {
     const filtered = filterEvents(events, {
-      ...DEFAULT_FILTERS,
+      ...defaultFilters(SCALE),
       q: "trail",
       location: "Sylhet",
       tag: "Ultra",
-    });
+    }, SCALE);
     assert.equal(filtered.length, 1);
     assert.equal(filtered[0].id, "2");
   });
 
   it("does not substring-match unrelated tags", () => {
     const filtered = filterEvents(events, {
-      ...DEFAULT_FILTERS,
+      ...defaultFilters(SCALE),
       tag: "Marathon",
-    });
+    }, SCALE);
     assert.equal(filtered.length, 1);
     assert.equal(filtered[0].id, "3");
   });
 
-  it("filters by distance slider range", () => {
-    const mid = filterEvents(events, { ...DEFAULT_FILTERS, dMin: 8, dMax: 15 });
+  it("filters by distance slider range with snapped values", () => {
+    const mid = filterEvents(events, {
+      ...defaultFilters(SCALE),
+      dMin: 10,
+      dMax: 10,
+    }, SCALE);
     assert.deepEqual(mid.map((e) => e.id), ["1"]);
 
-    const long = filterEvents(events, { ...DEFAULT_FILTERS, dMin: 40, dMax: 50 });
+    const long = filterEvents(events, {
+      ...defaultFilters(SCALE),
+      dMin: 42.2,
+      dMax: 50,
+    }, SCALE);
     assert.deepEqual(long.map((e) => e.id).sort(), ["2", "3"]);
 
-    assert.equal(formatDistanceRange(0, 50), "Any distance");
-    assert.equal(formatDistanceRange(5, 21), "5K – 21K");
+    assert.equal(formatDistanceRange(SCALE[0], SCALE[SCALE.length - 1], SCALE), "Any distance");
+    assert.equal(formatDistanceRange(10, 42.2, SCALE), "10K – 42.2K");
   });
 
   it("sorts by popularity", () => {
@@ -100,18 +111,17 @@ describe("filters and url state", () => {
 
   it("serializes and restores query state", () => {
     const state = {
-      ...DEFAULT_FILTERS,
+      ...defaultFilters(SCALE),
       q: "dhaka",
-      dMin: 5,
-      dMax: 21,
+      dMin: 42.2,
+      dMax: 50,
       fee: "500-1000",
       location: "Dhaka",
       sort: "popular" as const,
     };
-    const search = filtersToSearch(state);
+    const search = filtersToSearch(state, SCALE);
     assert.equal(search.includes("q=dhaka"), true);
-    assert.equal(search.includes("dmin=5"), true);
-    assert.equal(search.includes("dmax=21"), true);
-    assert.deepEqual(parseFiltersFromSearch(search), state);
+    assert.equal(search.includes("dmin=42.2"), true);
+    assert.deepEqual(parseFiltersFromSearch(search, SCALE), state);
   });
 });

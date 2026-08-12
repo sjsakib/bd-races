@@ -7,6 +7,7 @@ import {
   normalizeEvent,
   filterFutureEvents,
 } from "../web/src/normalize.ts";
+import { extractDistrict } from "../web/src/districts.ts";
 import type { RawEvent } from "../web/src/types.ts";
 
 describe("normalize", () => {
@@ -21,10 +22,19 @@ describe("normalize", () => {
     );
   });
 
-  it("extracts cities instead of postal codes", () => {
-    assert.equal(extractCity("Hatirjheel, Dhaka-1217, 1217"), "Dhaka");
-    assert.equal(extractCity("Online event"), "Online");
-    assert.equal(extractCity("Chittagong"), "Chittagong");
+  it("maps locations to districts", () => {
+    assert.equal(extractDistrict("Hatirjheel, Dhaka-1217, 1217"), "Dhaka");
+    assert.equal(extractDistrict("300 Feet Highway, Purbachal"), "Dhaka");
+    assert.equal(extractDistrict("Ali Kadam, Bandarban"), "Bandarban");
+    assert.equal(extractDistrict("CRB, Chittagong"), "Chattogram");
+    assert.equal(extractDistrict("Online event"), "Online");
+    assert.equal(extractDistrict("Panam City, Sonargaon, Narayanganj"), "Narayanganj");
+    assert.equal(extractDistrict("SHAMSHER NAGAR"), "Moulvibazar");
+    assert.equal(
+      extractDistrict("Sajek, Khagrachari, Rangamati, Bandarban, Thanchi, Alikadam"),
+      "Bandarban",
+    );
+    assert.equal(extractCity("Chittagong"), "Chattogram");
   });
 
   it("normalizes events and filters by Asia/Dhaka day", () => {
@@ -58,12 +68,11 @@ describe("normalize", () => {
     const futureRace = normalizeEvent(raw[0], 0);
     assert.equal(futureRace.website, "https://example.com");
     assert.equal(futureRace.location, "Dhaka");
+    assert.equal(futureRace.city, "Dhaka");
     assert.deepEqual(futureRace.tags, ["Road Race"]);
 
     const all = raw.map((event, index) => normalizeEvent(event, index));
     const { future, past } = filterFutureEvents(all, 20260812);
-    // 17 Jan 2026 is before Aug 12 2026 in this fixture set intentionally?
-    // Wait - 20260117 < 20260812, so it is past relative to Aug 12 2026.
     assert.equal(future.length, 0);
     assert.equal(past.length, 2);
 

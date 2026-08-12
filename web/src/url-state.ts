@@ -1,26 +1,35 @@
 import type { FilterState, SortKey } from "./types";
 import {
-  clampDistance,
-  DEFAULT_FILTERS,
-  DISTANCE_SLIDER_MAX,
-  DISTANCE_SLIDER_MIN,
+  defaultFilters,
   isDistanceFilterActive,
+  snapToScale,
+  type DistanceScale,
 } from "./filters";
 
 const SORT_VALUES: SortKey[] = ["date", "popular", "fee", "distance", "name"];
 
-function parseBound(raw: string | null, fallback: number): number {
+function parseBound(
+  raw: string | null,
+  fallback: number,
+  scale: DistanceScale,
+): number {
   if (raw === null || raw === "") return fallback;
-  return clampDistance(Number(raw));
+  const value = Number(raw);
+  if (!Number.isFinite(value)) return fallback;
+  return snapToScale(value, scale);
 }
 
-export function parseFiltersFromSearch(search: string): FilterState {
+export function parseFiltersFromSearch(
+  search: string,
+  scale: DistanceScale,
+): FilterState {
+  const defaults = defaultFilters(scale);
   const params = new URLSearchParams(
     search.startsWith("?") ? search.slice(1) : search,
   );
   const sort = params.get("sort") as SortKey | null;
-  let dMin = parseBound(params.get("dmin"), DISTANCE_SLIDER_MIN);
-  let dMax = parseBound(params.get("dmax"), DISTANCE_SLIDER_MAX);
+  let dMin = parseBound(params.get("dmin"), defaults.dMin, scale);
+  let dMax = parseBound(params.get("dmax"), defaults.dMax, scale);
   if (dMin > dMax) {
     const swap = dMin;
     dMin = dMax;
@@ -35,30 +44,37 @@ export function parseFiltersFromSearch(search: string): FilterState {
     location: params.get("location") ?? "",
     tag: params.get("tag") ?? "",
     month: params.get("month") ?? "",
-    sort: sort && SORT_VALUES.includes(sort) ? sort : DEFAULT_FILTERS.sort,
+    sort: sort && SORT_VALUES.includes(sort) ? sort : defaults.sort,
   };
 }
 
-export function filtersToSearch(state: FilterState): string {
+export function filtersToSearch(
+  state: FilterState,
+  scale: DistanceScale,
+): string {
+  const defaults = defaultFilters(scale);
   const params = new URLSearchParams();
   if (state.q.trim()) params.set("q", state.q.trim());
-  if (isDistanceFilterActive(state)) {
-    if (state.dMin > DISTANCE_SLIDER_MIN) params.set("dmin", String(state.dMin));
-    if (state.dMax < DISTANCE_SLIDER_MAX) params.set("dmax", String(state.dMax));
+  if (isDistanceFilterActive(state, scale)) {
+    if (state.dMin > defaults.dMin) params.set("dmin", String(state.dMin));
+    if (state.dMax < defaults.dMax) params.set("dmax", String(state.dMax));
   }
   if (state.fee) params.set("fee", state.fee);
   if (state.location) params.set("location", state.location);
   if (state.tag) params.set("tag", state.tag);
   if (state.month) params.set("month", state.month);
-  if (state.sort !== DEFAULT_FILTERS.sort) params.set("sort", state.sort);
+  if (state.sort !== defaults.sort) params.set("sort", state.sort);
   const query = params.toString();
   return query ? `?${query}` : "";
 }
 
-export function countActiveFilters(state: FilterState): number {
+export function countActiveFilters(
+  state: FilterState,
+  scale: DistanceScale,
+): number {
   let count = 0;
   if (state.q.trim()) count += 1;
-  if (isDistanceFilterActive(state)) count += 1;
+  if (isDistanceFilterActive(state, scale)) count += 1;
   if (state.fee) count += 1;
   if (state.location) count += 1;
   if (state.tag) count += 1;

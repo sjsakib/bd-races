@@ -1,15 +1,16 @@
 import { monthKeyFromYmd, monthLabelFromKey, isoDateFromYmd } from "./date";
 import {
-  clampDistance,
+  buildDistanceScale,
   collectFilterOptions,
-  DEFAULT_FILTERS,
-  DISTANCE_SLIDER_MAX,
-  DISTANCE_SLIDER_MIN,
-  DISTANCE_SLIDER_STEP,
+  defaultFilters,
   filterEvents,
+  formatDistanceLabel,
   formatDistanceRange,
+  indexToDistance,
   isDistanceFilterActive,
+  pickDistanceTicks,
   sortEvents,
+  type DistanceScale,
 } from "./filters";
 import {
   buildCopyText,
@@ -106,27 +107,35 @@ function field(label: string, control: HTMLElement): HTMLElement {
   ]);
 }
 
-function createDistanceSlider(initialMin: number, initialMax: number): {
+function createDistanceSlider(
+  scale: DistanceScale,
+  initialMin: number,
+  initialMax: number,
+): {
   root: HTMLElement;
   minInput: HTMLInputElement;
   maxInput: HTMLInputElement;
   valueLabel: HTMLElement;
   sync: (min: number, max: number) => void;
 } {
+  const maxIndex = Math.max(0, scale.length - 1);
+  const minIndex = scale.indexOf(initialMin);
+  const maxIndexValue = scale.indexOf(initialMax);
+
   const valueLabel = el("div", {
     className: "range-value",
     id: "distance-range-value",
-    text: formatDistanceRange(initialMin, initialMax),
+    text: formatDistanceRange(initialMin, initialMax, scale),
   });
 
   const minInput = el("input", {
     type: "range",
     id: "distance-min",
     className: "range-input range-input-min",
-    min: String(DISTANCE_SLIDER_MIN),
-    max: String(DISTANCE_SLIDER_MAX),
-    step: String(DISTANCE_SLIDER_STEP),
-    value: String(initialMin),
+    min: "0",
+    max: String(maxIndex),
+    step: "1",
+    value: String(minIndex >= 0 ? minIndex : 0),
     "aria-label": "Minimum distance in kilometers",
   }) as HTMLInputElement;
 
@@ -134,10 +143,10 @@ function createDistanceSlider(initialMin: number, initialMax: number): {
     type: "range",
     id: "distance-max",
     className: "range-input range-input-max",
-    min: String(DISTANCE_SLIDER_MIN),
-    max: String(DISTANCE_SLIDER_MAX),
-    step: String(DISTANCE_SLIDER_STEP),
-    value: String(initialMax),
+    min: "0",
+    max: String(maxIndex),
+    step: "1",
+    value: String(maxIndexValue >= 0 ? maxIndexValue : maxIndex),
     "aria-label": "Maximum distance in kilometers",
   }) as HTMLInputElement;
 
@@ -147,13 +156,14 @@ function createDistanceSlider(initialMin: number, initialMax: number): {
     maxInput,
   ]);
 
-  const ticks = el("div", { className: "range-ticks" }, [
-    el("span", { text: "0K" }),
-    el("span", { text: "10K" }),
-    el("span", { text: "21K" }),
-    el("span", { text: "42K" }),
-    el("span", { text: "50K+" }),
-  ]);
+  const ticks = el("div", { className: "range-ticks" });
+  for (const distance of pickDistanceTicks(scale)) {
+    const idx = Math.max(0, scale.indexOf(distance));
+    const position = maxIndex > 0 ? (idx / maxIndex) * 100 : 0;
+    const tick = el("span", { text: formatDistanceLabel(distance) });
+    tick.style.left = `${position}%`;
+    ticks.append(tick);
+  }
 
   const root = el("div", { className: "distance-slider" }, [
     valueLabel,
@@ -162,13 +172,15 @@ function createDistanceSlider(initialMin: number, initialMax: number): {
   ]);
 
   function sync(min: number, max: number) {
-    minInput.value = String(min);
-    maxInput.value = String(max);
-    valueLabel.textContent = formatDistanceRange(min, max);
+    const minIdx = Math.max(0, scale.indexOf(min));
+    const maxIdx = Math.max(minIdx, scale.indexOf(max));
+    minInput.value = String(minIdx);
+    maxInput.value = String(maxIdx);
+    valueLabel.textContent = formatDistanceRange(min, max, scale);
     const fill = root.querySelector("#distance-range-fill") as HTMLElement | null;
-    if (fill) {
-      const start = min / DISTANCE_SLIDER_MAX;
-      const end = max / DISTANCE_SLIDER_MAX;
+    if (fill && maxIndex > 0) {
+      const start = minIdx / maxIndex;
+      const end = maxIdx / maxIndex;
       fill.style.left = `calc(var(--range-thumb) + (100% - var(--range-thumb-size)) * ${start})`;
       fill.style.width = `calc((100% - var(--range-thumb-size)) * ${Math.max(0, end - start)})`;
     }
@@ -180,7 +192,8 @@ function createDistanceSlider(initialMin: number, initialMax: number): {
 }
 
 export function createApp(root: HTMLElement, allEvents: EventRecord[], buildYmd: number) {
-  let state: FilterState = parseFiltersFromSearch(window.location.search);
+  const distanceScale = buildDistanceScale(allEvents);
+  let state: FilterState = parseFiltersFromSearch(window.location.search, distanceScale);
   let visibleEvents: EventRecord[] = [];
   const options = collectFilterOptions(allEvents);
 
@@ -227,7 +240,7 @@ export function createApp(root: HTMLElement, allEvents: EventRecord[], buildYmd:
     sortSelect.append(option);
   }
 
-  const distanceSlider = createDistanceSlider(state.dMin, state.dMax);
+  const distanceSlider = createDistanceSlider(distanceScale, state.dMin, state.dMax);
 
   const feeSelect = createSelect(
     "fee-filter",
@@ -409,7 +422,7 @@ export function createApp(root: HTMLElement, allEvents: EventRecord[], buildYmd:
   }
 
   function updateUrl() {
-    const next = `${window.location.pathname}${filtersToSearch(state)}${window.location.hash}`;
+    const next = `${window.location.pathname}${filtersToSearch(state, distanceScale)}${window.location.hash}`;
     window.history.replaceState(null, "", next);
   }
 
@@ -425,14 +438,15 @@ export function createApp(root: HTMLElement, allEvents: EventRecord[], buildYmd:
         },
       });
     }
-    if (isDistanceFilterActive(state)) {
+    if (isDistanceFilterActive(state, distanceScale)) {
       items.push({
-        label: formatDistanceRange(state.dMin, state.dMax),
+        label: formatDistanceRange(state.dMin, state.dMax, distanceScale),
         clear: () => {
+          const defaults = defaultFilters(distanceScale);
           state = {
             ...state,
-            dMin: DISTANCE_SLIDER_MIN,
-            dMax: DISTANCE_SLIDER_MAX,
+            dMin: defaults.dMin,
+            dMax: defaults.dMax,
           };
         },
       });
@@ -619,12 +633,12 @@ export function createApp(root: HTMLElement, allEvents: EventRecord[], buildYmd:
     locationSelect.value = state.location;
     tagSelect.value = state.tag;
     monthSelect.value = state.month;
-    const active = countActiveFilters(state);
+    const active = countActiveFilters(state, distanceScale);
     filterToggle.textContent = active ? `Filters (${active})` : "Filters";
   }
 
   function render() {
-    visibleEvents = sortEvents(filterEvents(allEvents, state), state.sort);
+    visibleEvents = sortEvents(filterEvents(allEvents, state, distanceScale), state.sort);
     resultCount.textContent = `${visibleEvents.length} of ${allEvents.length} upcoming races`;
     liveRegion.textContent = `Showing ${visibleEvents.length} of ${allEvents.length} events`;
     renderChips();
@@ -633,17 +647,19 @@ export function createApp(root: HTMLElement, allEvents: EventRecord[], buildYmd:
   }
 
   function clearAll() {
-    state = { ...DEFAULT_FILTERS };
+    state = defaultFilters(distanceScale);
     syncControls();
     render();
     setSheetOpen(false);
   }
 
   function onDistanceInput(which: "min" | "max") {
-    let dMin = clampDistance(Number(distanceSlider.minInput.value));
-    let dMax = clampDistance(Number(distanceSlider.maxInput.value));
-    if (which === "min" && dMin > dMax) dMax = dMin;
-    if (which === "max" && dMax < dMin) dMin = dMax;
+    let minIdx = Number(distanceSlider.minInput.value);
+    let maxIdx = Number(distanceSlider.maxInput.value);
+    if (which === "min" && minIdx > maxIdx) maxIdx = minIdx;
+    if (which === "max" && maxIdx < minIdx) minIdx = maxIdx;
+    const dMin = indexToDistance(minIdx, distanceScale);
+    const dMax = indexToDistance(maxIdx, distanceScale);
     state = { ...state, dMin, dMax };
     distanceSlider.sync(dMin, dMax);
     render();

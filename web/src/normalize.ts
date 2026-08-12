@@ -1,5 +1,6 @@
 import type { EventRecord, RawEvent } from "./types";
 import { parseEventStartYmd } from "./date";
+import { extractDistrict } from "./districts";
 
 const FB_ID_RE = /facebook\.com\/events\/(\d+)/i;
 
@@ -34,32 +35,8 @@ export function normalizeLocation(location: string | null | undefined): string {
     .join(", ") || "Location TBA";
 }
 
-export function extractCity(location: string): string {
-  if (!location || location === "Location TBA") return "Unknown";
-  if (/online/i.test(location)) return "Online";
-
-  const parts = location
-    .split(",")
-    .map((p) => p.trim())
-    .filter(Boolean);
-
-  // Prefer a named city token over postal codes
-  for (let i = parts.length - 1; i >= 0; i -= 1) {
-    const part = parts[i].replace(/\d{3,}/g, "").replace(/[-–—]/g, " ").trim();
-    if (part && !/^\d+$/.test(part)) {
-      // Collapse "Dhaka 1217" style leftovers
-      const cleaned = part.replace(/\s+/g, " ").trim();
-      if (cleaned) return cleaned;
-    }
-  }
-
-  // Fallback: strip trailing postal-only segments
-  for (let i = parts.length - 1; i >= 0; i -= 1) {
-    if (!/^\d+$/.test(parts[i])) return parts[i];
-  }
-
-  return parts[parts.length - 1] || "Unknown";
-}
+/** @deprecated Use extractDistrict — kept for tests and backward compatibility. */
+export const extractCity = extractDistrict;
 
 export function normalizeTags(tags: string | null | undefined): string[] {
   if (!tags || typeof tags !== "string") return [];
@@ -113,7 +90,7 @@ export function normalizeEvent(raw: RawEvent, index: number): EventRecord {
     dateYmd,
     distance: nullableNumber(raw.distance),
     location,
-    city: extractCity(location),
+    city: extractDistrict(location),
     fee: nullableNumber(raw.fee),
     earlyBirdFee: nullableNumber(raw.earlyBirdFee),
     website: normalizeWebsite(raw.website),

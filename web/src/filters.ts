@@ -1,15 +1,36 @@
 import { monthKeyFromYmd } from "./date";
 import type { EventRecord, FilterState, SortKey } from "./types";
 
-/** Slider spans 0–50K; 50 means “50K+” (no upper bound). */
-export const DISTANCE_SLIDER_MIN = 0;
-export const DISTANCE_SLIDER_MAX = 50;
-export const DISTANCE_SLIDER_STEP = 1;
+export type DistanceScale = number[];
 
+export function buildDistanceScale(events: EventRecord[]): DistanceScale {
+  return [
+    ...new Set(
+      events
+        .map((event) => event.distance)
+        .filter((distance): distance is number => distance !== null),
+    ),
+  ].sort((a, b) => a - b);
+}
+
+export function defaultFilters(scale: DistanceScale): FilterState {
+  return {
+    q: "",
+    dMin: scale[0] ?? 0,
+    dMax: scale[scale.length - 1] ?? 0,
+    fee: "",
+    location: "",
+    tag: "",
+    month: "",
+    sort: "date",
+  };
+}
+
+/** @deprecated Use defaultFilters(scale) after events are loaded. */
 export const DEFAULT_FILTERS: FilterState = {
   q: "",
-  dMin: DISTANCE_SLIDER_MIN,
-  dMax: DISTANCE_SLIDER_MAX,
+  dMin: 0,
+  dMax: 0,
   fee: "",
   location: "",
   tag: "",
@@ -17,21 +38,64 @@ export const DEFAULT_FILTERS: FilterState = {
   sort: "date",
 };
 
-export function isDistanceFilterActive(state: Pick<FilterState, "dMin" | "dMax">): boolean {
-  return state.dMin > DISTANCE_SLIDER_MIN || state.dMax < DISTANCE_SLIDER_MAX;
+export function isDistanceFilterActive(
+  state: Pick<FilterState, "dMin" | "dMax">,
+  scale: DistanceScale,
+): boolean {
+  if (scale.length === 0) return false;
+  return state.dMin > scale[0] || state.dMax < scale[scale.length - 1];
 }
 
-export function formatDistanceRange(min: number, max: number): string {
-  if (min <= DISTANCE_SLIDER_MIN && max >= DISTANCE_SLIDER_MAX) {
+export function formatDistanceLabel(km: number): string {
+  return Number.isInteger(km) ? `${km}K` : `${km}K`;
+}
+
+export function formatDistanceRange(
+  min: number,
+  max: number,
+  scale: DistanceScale,
+): string {
+  if (!isDistanceFilterActive({ dMin: min, dMax: max }, scale)) {
     return "Any distance";
   }
-  if (min <= DISTANCE_SLIDER_MIN && max < DISTANCE_SLIDER_MAX) {
-    return `Up to ${max}K`;
+  if (min === max) return formatDistanceLabel(min);
+  return `${formatDistanceLabel(min)} – ${formatDistanceLabel(max)}`;
+}
+
+export function snapToScale(value: number, scale: DistanceScale): number {
+  if (scale.length === 0) return value;
+  let best = scale[0];
+  let bestDelta = Math.abs(value - best);
+  for (const distance of scale) {
+    const delta = Math.abs(value - distance);
+    if (delta < bestDelta) {
+      best = distance;
+      bestDelta = delta;
+    }
   }
-  if (min > DISTANCE_SLIDER_MIN && max >= DISTANCE_SLIDER_MAX) {
-    return `${min}K+`;
+  return best;
+}
+
+export function distanceIndex(value: number, scale: DistanceScale): number {
+  const exact = scale.indexOf(value);
+  if (exact >= 0) return exact;
+  return snapToScale(value, scale) === scale[0] ? 0 : scale.length - 1;
+}
+
+export function indexToDistance(index: number, scale: DistanceScale): number {
+  if (scale.length === 0) return 0;
+  const clamped = Math.min(scale.length - 1, Math.max(0, Math.round(index)));
+  return scale[clamped];
+}
+
+export function pickDistanceTicks(scale: DistanceScale): number[] {
+  if (scale.length <= 5) return scale.slice();
+  const picks: number[] = [scale[0]];
+  for (const target of [10, 21.1, 42.2]) {
+    if (scale.includes(target)) picks.push(target);
   }
-  return `${min}K – ${max}K`;
+  picks.push(scale[scale.length - 1]);
+  return picks;
 }
 
 export function effectiveFee(event: EventRecord): number | null {
@@ -44,14 +108,11 @@ function matchesDistance(
   event: EventRecord,
   dMin: number,
   dMax: number,
+  scale: DistanceScale,
 ): boolean {
-  if (!isDistanceFilterActive({ dMin, dMax })) return true;
+  if (!isDistanceFilterActive({ dMin, dMax }, scale)) return true;
   if (event.distance === null) return false;
-
-  const min = Math.max(DISTANCE_SLIDER_MIN, dMin);
-  const max = Math.min(DISTANCE_SLIDER_MAX, dMax);
-  const upper = max >= DISTANCE_SLIDER_MAX ? Number.POSITIVE_INFINITY : max + 0.1;
-  return event.distance >= min && event.distance <= upper;
+  return event.distance >= dMin && event.distance <= dMax;
 }
 
 function matchesFee(event: EventRecord, fee: string): boolean {
@@ -78,6 +139,7 @@ function matchesFee(event: EventRecord, fee: string): boolean {
 export function filterEvents(
   events: EventRecord[],
   state: FilterState,
+  scale: DistanceScale,
 ): EventRecord[] {
   const q = state.q.trim().toLowerCase();
 
@@ -94,7 +156,7 @@ export function filterEvents(
       if (!haystack.includes(q)) return false;
     }
 
-    if (!matchesDistance(event, state.dMin, state.dMax)) return false;
+    if (!matchesDistance(event, state.dMin, state.dMax, scale)) return false;
     if (!matchesFee(event, state.fee)) return false;
 
     if (state.location && event.city !== state.location) return false;
@@ -168,21 +230,7 @@ export function collectFilterOptions(events: EventRecord[]): {
   const months = [
     ...new Set(events.map((e) => monthKeyFromYmd(e.dateYmd))),
   ].sort();
-  const distances = [
-    ...new Set(
-      events
-        .map((e) => e.distance)
-        .filter((d): d is number => d !== null),
-    ),
-  ].sort((a, b) => a - b);
+  const distances = buildDistanceScale(events);
 
   return { locations, tags, months, distances };
-}
-
-export function clampDistance(value: number): number {
-  if (!Number.isFinite(value)) return DISTANCE_SLIDER_MIN;
-  return Math.min(
-    DISTANCE_SLIDER_MAX,
-    Math.max(DISTANCE_SLIDER_MIN, Math.round(value)),
-  );
 }

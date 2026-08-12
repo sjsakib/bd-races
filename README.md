@@ -29,6 +29,23 @@ pnpm build -- --as-of=2026-08-12
 
 ## Editing events
 
+### Quick workflow (slash command)
+
+Type `/fb-scrape` in Cursor, or run directly:
+
+```bash
+pnpm fb:login   # once — save Facebook session
+pnpm fb:run     # collect auto pages first → scrape → agent extracts
+```
+
+`BD Runners` remains manual-last (login wall): run `fb-script.js` there and paste links after `pnpm fb:run`.
+
+The agent handles extraction into `page/events.json`, validation, and rebuild.
+
+Manual fallback: run `fb-script.js` in browser DevTools if Playwright collection fails.
+
+### Manual workflow
+
 1. Scrape/raw text lives in `raw_events/`
 2. Append structured entries to `page/events.json` using the schema in `prompt.txt`
 3. Run `pnpm build` and commit both the JSON and resulting workflow inputs
