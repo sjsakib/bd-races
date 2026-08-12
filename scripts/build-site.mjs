@@ -54,10 +54,28 @@ function escapeHtml(value) {
 }
 
 function createFaviconSvg() {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
-  <rect width="64" height="64" rx="16" fill="#14201b"/>
-  <circle cx="32" cy="32" r="18" fill="none" stroke="#d7ff4e" stroke-width="6"/>
-  <path d="M18 40c6-10 10-14 14-14s8 4 14 14" fill="none" stroke="#ff5a1f" stroke-width="5" stroke-linecap="round"/>
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Running events</title>
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="20%" r="90%">
+      <stop offset="0" stop-color="#29483b"/>
+      <stop offset="1" stop-color="#101a16"/>
+    </radialGradient>
+    <linearGradient id="runner" x1="18" y1="12" x2="51" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f4ffe0"/>
+      <stop offset="0.38" stop-color="#d7ff4e"/>
+      <stop offset="1" stop-color="#a9dc28"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#bg)"/>
+  <path d="M7 27h10M5 35h12M8 43h8" fill="none" stroke="#ff5a1f" stroke-width="3.5" stroke-linecap="round"/>
+  <g fill="none" stroke="url(#runner)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M33 23l-9 6-7-4M35 23l8 6 7-5" stroke-width="5.5"/>
+    <path d="M34 22l-5 13 7 3" stroke-width="7"/>
+    <path d="M30 35l-8 9-9 5M36 38l9 4 7 8" stroke-width="6.5"/>
+  </g>
+  <circle cx="39.5" cy="13.5" r="5.5" fill="#d7ff4e"/>
+  <path d="M9 54h46" stroke="#ff5a1f" stroke-width="3" stroke-linecap="round"/>
 </svg>`;
 }
 
