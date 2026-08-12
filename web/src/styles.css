@@ -638,6 +638,10 @@ select {
   .filter-panel {
     position: sticky;
     top: 6.5rem;
+    max-height: calc(100vh - 7.5rem);
+    max-height: calc(100dvh - 7.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .filter-toggle,
