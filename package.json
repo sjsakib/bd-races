@@ -10,7 +10,6 @@
     "fb:diff": "node scripts/diff-event-links.mjs",
     "fb:scrape": "node scripts/scrape-events.mjs --profile",
     "fb:sync-script": "node scripts/sync-fb-script.mjs",
-    "fb:login": "node scripts/fb-scrape-run.mjs --login",
     "fb:run": "node scripts/fb-scrape-run.mjs",
     "fb:collect": "node scripts/fb-scrape-run.mjs --collect-only",
     "test:e2e": "playwright test"

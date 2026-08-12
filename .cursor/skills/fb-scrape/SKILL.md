@@ -1,91 +1,83 @@
 ---
 name: fb-scrape
 description: >-
-  Semi-automated Facebook event discovery workflow for BD Races. Runs Playwright
-  to collect links from all configured pages, scrape new events plus up to 10
-  refreshes for events more than 3 weeks away, then agent extracts into
-  events.json. Use when the user invokes /fb-scrape or asks to sync, scrape,
-  or import Facebook running events.
+  Semi-automated Facebook event discovery for BD Races. Runs Playwright collect+scrape,
+  then MUST extract into events.json without stopping. Use for /fb-scrape or sync/scrape/
+  import of Facebook running events.
 disable-model-invocation: true
 ---
 
 # Facebook Event Scrape Workflow
 
-## Automated mode (default)
+Do not stop after scrape. Extraction → sync → check → build are mandatory in the same turn.
+BD Runners is fully manual and out of scope for this command — never ask the user about it here.
 
-One command collects from all auto pages, diffs, and scrapes. Manual-only pages are handled by the user at the end.
-
-### First-time setup
-
-```bash
-pnpm fb:login
-```
-
-Log in to Facebook in the opened browser, then press Enter in the terminal. Session is saved to `.playwright-fb-profile/`.
-
-### Each run
+## Run
 
 ```bash
-pnpm fb:run
+pnpm fb:run     # or --collect-only for discovery only
 ```
 
-This will:
-1. Open all `scrapeMode: "auto"` pages from `facebook-pages.json` in parallel tabs
-2. Scroll and collect event links (same logic as `fb-script.js`)
-3. Select: all new links + up to 10 known links more than 3 weeks away
-4. Scrape selected events into `raw_events/<id>.txt`
+Collects all `scrapeMode: "auto"` pages in `facebook-pages.json`, diffs, scrapes new + up to 10 refresh (>3 weeks away) into `raw_events/<id>.txt`, prints JSON with `needsExtraction` / `needsUpdate`.
 
-Then the agent:
-1. Extracts new events (`needsExtraction`) and updates refreshed ones (`needsUpdate`) in `page/events.json` per `prompt.txt`
-2. Runs `node scripts/sync-fb-script.mjs`
-3. Runs `pnpm check && pnpm build`
-4. Summarizes results
+## Agent checklist (same turn, in order)
 
-### When `/fb-scrape` is invoked
+1. Parse `pnpm fb:run` JSON.
+2. **Extract immediately**:
+   - `needsExtraction` → append new entries to `page/events.json`
+   - `needsUpdate` → re-read raw files and update matching entries
+3. `node scripts/sync-fb-script.mjs`
+4. `pnpm check && pnpm build`
+5. Summarize: new / updated / failed IDs.
 
-Run `pnpm fb:run` (or `--collect-only` if user only wants link discovery). Parse the JSON output and proceed with extraction.
+If a single event scrape fails: skip that ID, continue the rest. Do not prompt for login or manual pages.
 
-Then prompt the user to run `fb-script.js` manually for any `manualPages` returned by the command output (for now, `BD Runners`), and paste those links so they can be merged into the same scrape cycle.
+## Extraction rules (inline — do not skip)
 
-If login fails, tell user to run `pnpm fb:login` first.
+Read each `raw_events/<eventId>.txt` yourself (no extraction scripts). Fields:
 
-## Manual fallback
+| Field | Rule |
+|-------|------|
+| name | Base title; **must end with ` | {distance}k`** when distance known |
+| date | Event date |
+| distance | km number only: `21.1`, `10`, `5` |
+| location | Comma-separated; omit "Bangladesh" |
+| fee / earlyBirdFee | Per-distance when listed separately |
+| website | Registration/info URL |
+| tags | Comma-separated (e.g. AIMS); else null |
+| responseCount | Going/interested count |
+| fbLink | Canonical `https://www.facebook.com/events/<id>` |
 
-If Playwright collection fails (Facebook blocks, layout change):
+Missing → `null`.
 
-1. User runs `fb-script.js` manually on each page
-2. User pastes links
-3. Agent runs `node scripts/diff-event-links.mjs --file links.txt`
-4. Agent runs `node scripts/scrape-events.mjs --profile <ids...>`
+**Multi-distance:** one JSON object per distance. Suffix is mandatory so rows are not duplicates:
 
-## Selection rules
+```
+Turkish Airlines ActivePulse International Half Marathon 2026 | 21.1k
+Turkish Airlines ActivePulse International Half Marathon 2026 | 14.6k
+Turkish Airlines ActivePulse International Half Marathon 2026 | 7.3k
+```
 
-- **All new links** → scrape + extract
-- **Up to 10 known links** more than **3 weeks away** → re-scrape + update
-- **Known links within 3 weeks** → skip (registration likely closed)
+Wrong: same name, no `| Xk`. If title already has `| …`, append distance last: `Dhaka 25k 2027 | 4th Edition | 25k`.
 
-## Configured page URLs
+Update `page/events.json` after each file. Skip IDs already present unless in `needsUpdate`.
 
-All auto-scrape sources live in `facebook-pages.json`. Notable:
+Canonical copy also lives in `prompt.txt` (manual edits). Prefer these inline rules during `/fb-scrape`.
 
-- **The Athlete X** → `https://www.facebook.com/theathletexbd/events` (not `thexvr`, which is a separate XVR page)
+## Selection
 
-## Key files
+| Links | Action |
+|-------|--------|
+| New | Scrape + extract |
+| Known, >3 weeks away | Refresh up to 10 + update |
+| Known, ≤3 weeks | Skip |
 
-| File | Purpose |
-|------|---------|
-| `facebook-pages.json` | Scrape sources with `scrapeMode` (auto/manual) |
-| `scripts/fb-scrape-run.mjs` | Full automated pipeline |
-| `scripts/fb-collect.mjs` | Link collection from listing pages |
-| `scripts/fb-scrape-page.mjs` | Single event page scraper |
-| `scripts/fb-browser.mjs` | Persistent Facebook login profile |
-| `scripts/diff-event-links.mjs` | Select new + refresh targets |
-| `fb-script.js` | Manual browser fallback |
-| `page/events.json` | Curated event data |
-| `prompt.txt` | Extraction schema |
+## Manual fallback (auto pages only)
 
-## Rules
+If Playwright collect fails: user runs `fb-script.js` on auto pages, pastes links → `node scripts/diff-event-links.mjs --file links.txt` → `node scripts/scrape-events.mjs --profile <ids...>` → same extraction checklist.
 
-- Never commit unless the user asks
-- If scrape fails (login wall, timeout), tell the user and skip that ID
-- If `pnpm check` fails, fix missing entries before building
+## Notes
+
+- Never commit unless asked.
+- The Athlete X auto URL is `theathletexbd/events` (not `thexvr`).
+- Key files: `facebook-pages.json`, `scripts/fb-scrape-run.mjs`, `page/events.json`, `raw_events/`.

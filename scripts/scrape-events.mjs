@@ -82,7 +82,7 @@ async function main() {
   if (useProfile) {
     context = await launchFbContext();
     if (!(await ensureLoggedIn(context))) {
-      console.error('Not logged in. Run: pnpm fb:login');
+      console.error('Not logged in to the saved Facebook profile.');
       process.exit(1);
     }
   } else {

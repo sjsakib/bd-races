@@ -34,11 +34,10 @@ pnpm build -- --as-of=2026-08-12
 Type `/fb-scrape` in Cursor, or run directly:
 
 ```bash
-pnpm fb:login   # once — save Facebook session
-pnpm fb:run     # collect auto pages first → scrape → agent extracts
+pnpm fb:run     # collect auto pages → scrape → agent extracts
 ```
 
-`BD Runners` remains manual-last (login wall): run `fb-script.js` there and paste links after `pnpm fb:run`.
+`BD Runners` is fully manual and outside this command.
 
 The agent handles extraction into `page/events.json`, validation, and rebuild.
 

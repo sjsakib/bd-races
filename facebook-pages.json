@@ -44,7 +44,7 @@
   {
     "name": "BD Runners",
     "url": "https://www.facebook.com/groups/bdrunners/events",
-    "notes": "Manual only (login required)",
+    "notes": "Fully manual — outside /fb-scrape",
     "scrapeMode": "manual"
   }
 ]

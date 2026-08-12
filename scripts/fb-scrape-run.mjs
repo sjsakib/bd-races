@@ -1,20 +1,18 @@
 #!/usr/bin/env node
 /**
- * Full automated FB scrape pipeline:
- *   collect links from all pages → diff → scrape selected events
+ * Automated FB scrape pipeline (auto pages only):
+ *   collect links → diff → scrape selected events
  *
- * First-time setup:
- *   node scripts/fb-scrape-run.mjs --login
- *
- * Regular run:
  *   node scripts/fb-scrape-run.mjs
  *   pnpm fb:run
+ *
+ * BD Runners (scrapeMode: manual) is fully manual — not part of this command.
  */
 
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { ROOT, launchFbContext, ensureLoggedIn, loginSetup } from './fb-browser.mjs';
+import { ROOT, launchFbContext, ensureLoggedIn } from './fb-browser.mjs';
 import { collectAllPages } from './fb-collect.mjs';
 import { scrapeBatch } from './fb-scrape-page.mjs';
 import { extractIds, selectEventLinks } from './fb-utils.mjs';
@@ -31,30 +29,20 @@ function parseConcurrency() {
 }
 
 async function main() {
-  if (process.argv.includes('--login')) {
-    await loginSetup();
-    return;
-  }
-
   const collectOnly = process.argv.includes('--collect-only');
-  const includeManual = process.argv.includes('--include-manual');
   const concurrency = parseConcurrency();
   const allPages = JSON.parse(fs.readFileSync(PAGES_JSON, 'utf8'));
-  const pages = allPages.filter((p) => includeManual || p.scrapeMode !== 'manual');
-  const manualPages = allPages.filter((p) => p.scrapeMode === 'manual');
+  const pages = allPages.filter((p) => p.scrapeMode !== 'manual');
   const events = JSON.parse(fs.readFileSync(EVENTS_JSON, 'utf8'));
 
-  console.error(`Starting automated scrape (${pages.length} pages)...`);
-  if (manualPages.length > 0 && !includeManual) {
-    console.error(`Manual pages (run last by you): ${manualPages.map((p) => p.name).join(', ')}`);
-  }
+  console.error(`Starting automated scrape (${pages.length} auto pages)...`);
   const context = await launchFbContext();
 
   try {
     const loggedIn = await ensureLoggedIn(context);
     if (!loggedIn) {
       console.error('\nContinuing without Facebook login.');
-      console.error('Some pages/events may be limited. Manual pages should be done last.');
+      console.error('Some pages/events may be limited.');
     }
 
     const collected = await collectAllPages(context, pages);
@@ -75,13 +63,7 @@ async function main() {
       console.error('\nNothing to scrape.');
     }
 
-    const output = {
-      collected,
-      selection,
-      scraped,
-      manualPages,
-    };
-    console.log(JSON.stringify(output, null, 2));
+    console.log(JSON.stringify({ collected, selection, scraped }, null, 2));
   } finally {
     await context.close();
   }
