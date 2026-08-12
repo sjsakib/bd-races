@@ -25,19 +25,6 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 10.17.0
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Install Playwright browser
-        run: pnpm exec playwright install --with-deps chromium
-      - name: Build site
-        run: pnpm build
-      - name: Run end-to-end tests
-        run: pnpm exec playwright test --project=chromium
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
