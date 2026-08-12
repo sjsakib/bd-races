@@ -64,6 +64,12 @@ If Playwright collection fails (Facebook blocks, layout change):
 - **Up to 10 known links** more than **3 weeks away** → re-scrape + update
 - **Known links within 3 weeks** → skip (registration likely closed)
 
+## Configured page URLs
+
+All auto-scrape sources live in `facebook-pages.json`. Notable:
+
+- **The Athlete X** → `https://www.facebook.com/theathletexbd/events` (not `thexvr`, which is a separate XVR page)
+
 ## Key files
 
 | File | Purpose |

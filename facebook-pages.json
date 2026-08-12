@@ -26,11 +26,11 @@
   {
     "name": "The Athlete X",
     "url": "https://www.facebook.com/theathletexbd/events",
-    "notes": "The Athlete X event page",
+    "notes": "Main Athlete X events page. Do not use facebook.com/thexvr — that is a separate XVR page.",
     "scrapeMode": "auto"
   },
   {
-    "name": "Chunati.com",
+    "name": "Chunati.com",      
     "url": "https://www.facebook.com/chunatidotcom/events",
     "notes": "Found in event files as organizer page",
     "scrapeMode": "auto"
