@@ -2527,5 +2527,53 @@
     "tags": "Running",
     "responseCount": 2300,
     "fbLink": "https://www.facebook.com/events/25923606837328023"
+  },
+  {
+    "name": "JOLSHIRI RUNBANGLA MARATHON 2026 | 42.2k",
+    "date": "13 Nov 2026",
+    "distance": 42.2,
+    "location": "Jolshiri Central Park, Kanchan, Dhaka",
+    "fee": 1899,
+    "earlyBirdFee": 1749,
+    "website": "https://register.run-bangla.com/",
+    "tags": "Marathon, Running, AIMS",
+    "responseCount": 4000,
+    "fbLink": "https://www.facebook.com/events/877143868098350"
+  },
+  {
+    "name": "JOLSHIRI RUNBANGLA MARATHON 2026 | 21.1k",
+    "date": "13 Nov 2026",
+    "distance": 21.1,
+    "location": "Jolshiri Central Park, Kanchan, Dhaka",
+    "fee": 1699,
+    "earlyBirdFee": 1549,
+    "website": "https://register.run-bangla.com/",
+    "tags": "Half Marathon, Running, AIMS",
+    "responseCount": 4000,
+    "fbLink": "https://www.facebook.com/events/877143868098350"
+  },
+  {
+    "name": "JOLSHIRI RUNBANGLA MARATHON 2026 | 10k",
+    "date": "13 Nov 2026",
+    "distance": 10,
+    "location": "Jolshiri Central Park, Kanchan, Dhaka",
+    "fee": 1499,
+    "earlyBirdFee": 1349,
+    "website": "https://register.run-bangla.com/",
+    "tags": "Running, AIMS",
+    "responseCount": 4000,
+    "fbLink": "https://www.facebook.com/events/877143868098350"
+  },
+  {
+    "name": "JOLSHIRI RUNBANGLA MARATHON 2026 | 5k",
+    "date": "13 Nov 2026",
+    "distance": 5,
+    "location": "Jolshiri Central Park, Kanchan, Dhaka",
+    "fee": 1299,
+    "earlyBirdFee": 1199,
+    "website": "https://register.run-bangla.com/",
+    "tags": "Fun Run, Running, AIMS",
+    "responseCount": 4000,
+    "fbLink": "https://www.facebook.com/events/877143868098350"
   }
 ]
