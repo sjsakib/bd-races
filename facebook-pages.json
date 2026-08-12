@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Run Bangladesh",
+    "url": "https://www.facebook.com/runbangladesh71/events",
+    "notes": "Dhaka Move, AIMS-certified events",
+    "scrapeMode": "auto"
+  },
+  {
+    "name": "Run-Bangla",
+    "url": "https://www.facebook.com/groups/runbangla/events",
+    "notes": "Jolshiri RunBangla Marathon and other races",
+    "scrapeMode": "auto"
+  },
+  {
+    "name": "Active Pulse BD",
+    "url": "https://www.facebook.com/activepulsebd/events",
+    "notes": "Active Pulse running events",
+    "scrapeMode": "auto"
+  },
+  {
+    "name": "Road Runners Chattogram",
+    "url": "https://www.facebook.com/groups/roadrunnerschattogram/events",
+    "notes": "Found in event files as organizer group",
+    "scrapeMode": "auto"
+  },
+  {
+    "name": "The Athlete X",
+    "url": "https://www.facebook.com/theathletexbd/events",
+    "notes": "Main Athlete X events page. Do not use facebook.com/thexvr — that is a separate XVR page.",
+    "scrapeMode": "auto"
+  },
+  {
+    "name": "Chunati.com",      
+    "url": "https://www.facebook.com/chunatidotcom/events",
+    "notes": "Found in event files as organizer page",
+    "scrapeMode": "auto"
+  },
+  {
+    "name": "SUST Fitness Club",
+    "url": "https://www.facebook.com/sustfitnessclub/events",
+    "notes": "Found in event files as organizer page",
+    "scrapeMode": "auto"
+  },
+  {
+    "name": "BD Runners",
+    "url": "https://www.facebook.com/groups/bdrunners/events",
+    "notes": "Manual only (login required)",
+    "scrapeMode": "manual"
+  }
+]

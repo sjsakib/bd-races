@@ -132,10 +132,10 @@ function analyze() {
       missingInEventsJsonCount: missingInEventsJson.length,
       missingRawFilesCount: missingRawFiles.length,
       duplicateIdCount: duplicates.length,
+      // Duplicate fbLink IDs are expected for multi-distance race entries.
       mismatch:
         missingInEventsJson.length > 0 ||
-        missingRawFiles.length > 0 ||
-        duplicates.length > 0
+        missingRawFiles.length > 0
     },
     missingInEventsJson,
     missingRawFiles,

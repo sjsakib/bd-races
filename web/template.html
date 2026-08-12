@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#14201b" />
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{DESCRIPTION}}" />
+    <link rel="canonical" href="{{CANONICAL}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{TITLE}}" />
+    <meta property="og:description" content="{{DESCRIPTION}}" />
+    <meta property="og:url" content="{{CANONICAL}}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{TITLE}}" />
+    <meta name="twitter:description" content="{{DESCRIPTION}}" />
+    <link rel="icon" href="{{FAVICON_HREF}}" type="image/svg+xml" />
+    <meta http-equiv="Content-Security-Policy" content="{{CSP}}" />
+    <style>{{STYLES}}</style>
+    <script type="application/ld+json">{{JSON_LD}}</script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <noscript>
+      <section class="noscript">
+        <h1>Upcoming races in Bangladesh</h1>
+        <p>{{DESCRIPTION}}</p>
+        <ul>
+          {{NOSCRIPT_ITEMS}}
+        </ul>
+      </section>
+    </noscript>
+    <script>{{DATA_SCRIPT}}</script>
+    <script>{{APP_JS}}</script>
+  </body>
+</html>

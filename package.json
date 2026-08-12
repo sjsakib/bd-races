@@ -1,19 +1,38 @@
 {
   "name": "running-events",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Upcoming races in Bangladesh",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsx scripts/build-site.mjs",
+    "dev": "tsx scripts/build-site.mjs && npx --yes serve dist -p 4173",
+    "test": "tsx --test test/**/*.test.ts",
+    "check": "node check_events.js",
+    "fb:diff": "node scripts/diff-event-links.mjs",
+    "fb:scrape": "node scripts/scrape-events.mjs --profile",
+    "fb:sync-script": "node scripts/sync-fb-script.mjs",
+    "fb:login": "node scripts/fb-scrape-run.mjs --login",
+    "fb:run": "node scripts/fb-scrape-run.mjs",
+    "fb:collect": "node scripts/fb-scrape-run.mjs --collect-only",
+    "test:e2e": "playwright test"
   },
-  "keywords": [],
+  "keywords": ["running", "bangladesh", "races"],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.17.0",
   "dependencies": {
-    "playwright": "^1.55.1"
+    "playwright": "^1.62.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^24.3.0",
+    "esbuild": "^0.25.9",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
   },
   "volta": {
     "node": "24.11.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
   }
 }
