@@ -50,6 +50,8 @@ Read each `raw_events/<eventId>.txt` yourself (no extraction scripts). Fields:
 
 Missing → `null`.
 
+**Scope:** running, cycling, and triathlon only. Skip meetings, parties, recruitment, dinners, and other non-race club/academic events. Delete the skipped `raw_events/<id>.txt` so `pnpm check` stays 1:1.
+
 **Multi-distance:** one JSON object per distance. Suffix is mandatory so rows are not duplicates:
 
 ```

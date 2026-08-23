@@ -1,5 +1,10 @@
 Extract each `raw_events/<eventId>.txt` Facebook event into `page/events.json`.
 
+This catalog is running, cycling, and triathlon events only.
+
+## Skip (do not add; delete the raw file)
+Club socials, meetings, recruitment, parties, dinners, academic contests, and anything that is not a run/ride/tri race or endurance event. `pnpm check` requires a 1:1 match between raw files and `fbLink` IDs, so skipped IDs must not leave a `.txt` behind.
+
 ## Fields
 - name, date, distance (km number only, e.g. 21.1 / 10 / 5), location, fee, earlyBirdFee, website, tags, responseCount, fbLink
 - location: comma-separated; omit "Bangladesh"

@@ -38,7 +38,7 @@
   {
     "name": "SUST Fitness Club",
     "url": "https://www.facebook.com/sustfitnessclub/events",
-    "notes": "Found in event files as organizer page",
+    "notes": "Club page — extract running/cycling/triathlon races only; skip meetings, parties, recruitment",
     "scrapeMode": "auto"
   },
   {
