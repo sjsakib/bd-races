@@ -93,6 +93,7 @@ const existingLinks = [
   "https://www.facebook.com/events/1282929109365681/",
   "https://www.facebook.com/events/1310925940683664/",
   "https://www.facebook.com/events/1318540743030706/",
+  "https://www.facebook.com/events/1323309932989078/",
   "https://www.facebook.com/events/1325024898637276/",
   "https://www.facebook.com/events/1325592405440805/",
   "https://www.facebook.com/events/1327272625627369/",

@@ -80,4 +80,48 @@ describe("normalize", () => {
     assert.equal(stillUpcoming.length, 1);
     assert.equal(stillUpcoming[0].name, "Future Race | 10k");
   });
+
+  it("hides events that have passed since the last update", () => {
+    const lastUpdateYmd = 20260812;
+    const viewYmd = 20260823;
+    const events = [
+      normalizeEvent(
+        {
+          name: "Stale Race | 10k",
+          date: "15 Aug 2026",
+          distance: 10,
+          location: "Dhaka",
+          fee: null,
+          earlyBirdFee: null,
+          website: null,
+          tags: null,
+          responseCount: null,
+          fbLink: null,
+        },
+        0,
+      ),
+      normalizeEvent(
+        {
+          name: "Still Upcoming | 5k",
+          date: "25 Dec 2026",
+          distance: 5,
+          location: "Saidpur",
+          fee: null,
+          earlyBirdFee: null,
+          website: null,
+          tags: null,
+          responseCount: null,
+          fbLink: null,
+        },
+        1,
+      ),
+    ];
+
+    assert.equal(filterFutureEvents(events, lastUpdateYmd).future.length, 2);
+    const { future, past } = filterFutureEvents(events, viewYmd);
+    assert.equal(future.length, 1);
+    assert.equal(future[0].name, "Still Upcoming | 5k");
+    assert.equal(past.length, 1);
+    assert.equal(past[0].name, "Stale Race | 10k");
+  });
 });

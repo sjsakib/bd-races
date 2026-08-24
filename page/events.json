@@ -3055,5 +3055,53 @@
     "tags": "AIMS, Running",
     "responseCount": 1400,
     "fbLink": "https://www.facebook.com/events/971814489193469"
+  },
+  {
+    "name": "Northern Marathon 2026 | 42.2k",
+    "date": "25 Dec 2026",
+    "distance": 42.2,
+    "location": "Saidpur, Nilphamari",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Marathon, Running, AIMS",
+    "responseCount": 1800,
+    "fbLink": "https://www.facebook.com/events/1323309932989078"
+  },
+  {
+    "name": "Northern Marathon 2026 | 21.1k",
+    "date": "25 Dec 2026",
+    "distance": 21.1,
+    "location": "Saidpur, Nilphamari",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Half Marathon, Running, AIMS",
+    "responseCount": 1800,
+    "fbLink": "https://www.facebook.com/events/1323309932989078"
+  },
+  {
+    "name": "Northern Marathon 2026 | 10k",
+    "date": "25 Dec 2026",
+    "distance": 10,
+    "location": "Saidpur, Nilphamari",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Running, AIMS",
+    "responseCount": 1800,
+    "fbLink": "https://www.facebook.com/events/1323309932989078"
+  },
+  {
+    "name": "Northern Marathon 2026 | 5k",
+    "date": "25 Dec 2026",
+    "distance": 5,
+    "location": "Saidpur, Nilphamari",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Running, AIMS",
+    "responseCount": 1800,
+    "fbLink": "https://www.facebook.com/events/1323309932989078"
   }
 ]

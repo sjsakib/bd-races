@@ -1,4 +1,5 @@
-import { monthKeyFromYmd, monthLabelFromKey, isoDateFromYmd } from "./date";
+import { monthKeyFromYmd, monthLabelFromKey, isoDateFromYmd, todayYmd } from "./date";
+import { filterFutureEvents } from "./normalize";
 import {
   buildDistanceScale,
   collectFilterOptions,
@@ -191,7 +192,8 @@ function createDistanceSlider(
   return { root, minInput, maxInput, valueLabel, sync };
 }
 
-export function createApp(root: HTMLElement, allEvents: EventRecord[], buildYmd: number) {
+export function createApp(root: HTMLElement, sourceEvents: EventRecord[], buildYmd: number) {
+  const { future: allEvents } = filterFutureEvents(sourceEvents, todayYmd());
   const distanceScale = buildDistanceScale(allEvents);
   let state: FilterState = parseFiltersFromSearch(window.location.search, distanceScale);
   let visibleEvents: EventRecord[] = [];
