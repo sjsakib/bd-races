@@ -1764,36 +1764,36 @@
     "name": "Narsingdi Marathon 2026 | 42.2k",
     "date": "23 Oct 2026",
     "distance": 42.2,
-    "location": "Narsingdi Sadar",
+    "location": "Narsingdi Government College Gate, Shikkha Chattar, Narsingdi Sadar",
     "fee": 1700,
     "earlyBirdFee": 1550,
-    "website": "sports-bangla.com/event/narsingdi-marathon-2026",
+    "website": "https://sports-bangla.com/event/narsingdi-marathon-2026",
     "tags": "Marathon, Running",
-    "responseCount": 1400,
+    "responseCount": 1600,
     "fbLink": "https://www.facebook.com/events/862887989534030"
   },
   {
     "name": "Narsingdi Marathon 2026 | 21.1k",
     "date": "23 Oct 2026",
     "distance": 21.1,
-    "location": "Narsingdi Sadar",
+    "location": "Narsingdi Government College Gate, Shikkha Chattar, Narsingdi Sadar",
     "fee": 1450,
     "earlyBirdFee": 1300,
-    "website": "sports-bangla.com/event/narsingdi-marathon-2026",
+    "website": "https://sports-bangla.com/event/narsingdi-marathon-2026",
     "tags": "Half Marathon, Running",
-    "responseCount": 1400,
+    "responseCount": 1600,
     "fbLink": "https://www.facebook.com/events/862887989534030"
   },
   {
     "name": "Narsingdi Marathon 2026 | 10k",
     "date": "23 Oct 2026",
     "distance": 10,
-    "location": "Narsingdi Sadar",
+    "location": "Narsingdi Government College Gate, Shikkha Chattar, Narsingdi Sadar",
     "fee": 1250,
     "earlyBirdFee": 1100,
-    "website": "sports-bangla.com/event/narsingdi-marathon-2026",
+    "website": "https://sports-bangla.com/event/narsingdi-marathon-2026",
     "tags": "Running",
-    "responseCount": 1400,
+    "responseCount": 1600,
     "fbLink": "https://www.facebook.com/events/862887989534030"
   },
   {
@@ -1803,9 +1803,9 @@
     "location": "Patenga Sea Beach, Chattogram",
     "fee": null,
     "earlyBirdFee": null,
-    "website": "rrcrunbd.com/registration-rrc.php",
+    "website": "https://rrcrunbd.com/registration-rrc.php",
     "tags": "Half Marathon, Running",
-    "responseCount": 944,
+    "responseCount": 1100,
     "fbLink": "https://www.facebook.com/events/874807811947144"
   },
   {
@@ -1815,9 +1815,9 @@
     "location": "Patenga Sea Beach, Chattogram",
     "fee": null,
     "earlyBirdFee": null,
-    "website": "rrcrunbd.com/registration-rrc.php",
+    "website": "https://rrcrunbd.com/registration-rrc.php",
     "tags": "Running",
-    "responseCount": 944,
+    "responseCount": 1100,
     "fbLink": "https://www.facebook.com/events/874807811947144"
   },
   {
@@ -2067,9 +2067,9 @@
     "location": "300 Feet Highway, Purbachal",
     "fee": null,
     "earlyBirdFee": null,
-    "website": "countrymaker.org",
+    "website": "https://countrymaker.org",
     "tags": "Running, Youth, Health Awareness",
-    "responseCount": 197,
+    "responseCount": 443,
     "fbLink": "https://www.facebook.com/events/1466554991895530"
   },
   {
@@ -2079,9 +2079,9 @@
     "location": "300 Feet Highway, Purbachal",
     "fee": null,
     "earlyBirdFee": null,
-    "website": "countrymaker.org",
+    "website": "https://countrymaker.org",
     "tags": "Kids Run, Running",
-    "responseCount": 197,
+    "responseCount": 443,
     "fbLink": "https://www.facebook.com/events/1466554991895530"
   },
   {
@@ -2199,9 +2199,9 @@
     "location": "Hatirjheel Amphitheatre, Dhaka",
     "fee": 1399,
     "earlyBirdFee": null,
-    "website": "ultracamprunners.com",
+    "website": "https://ultracamprunners.com/",
     "tags": "Half Marathon, Running",
-    "responseCount": 5200,
+    "responseCount": 6000,
     "fbLink": "https://www.facebook.com/events/1580292636443073"
   },
   {
@@ -2211,9 +2211,9 @@
     "location": "Hatirjheel Amphitheatre, Dhaka",
     "fee": 1299,
     "earlyBirdFee": null,
-    "website": "ultracamprunners.com",
+    "website": "https://ultracamprunners.com/",
     "tags": "Running",
-    "responseCount": 5200,
+    "responseCount": 6000,
     "fbLink": "https://www.facebook.com/events/1580292636443073"
   },
   {
@@ -2223,9 +2223,9 @@
     "location": "Hatirjheel Amphitheatre, Dhaka",
     "fee": 1199,
     "earlyBirdFee": null,
-    "website": "ultracamprunners.com",
+    "website": "https://ultracamprunners.com/",
     "tags": "Running",
-    "responseCount": 5200,
+    "responseCount": 6000,
     "fbLink": "https://www.facebook.com/events/1580292636443073"
   },
   {
@@ -2235,9 +2235,9 @@
     "location": "Hatirjheel Amphitheatre, Dhaka",
     "fee": 999,
     "earlyBirdFee": null,
-    "website": "ultracamprunners.com",
+    "website": "https://ultracamprunners.com/",
     "tags": "Kids Run, Running",
-    "responseCount": 5200,
+    "responseCount": 6000,
     "fbLink": "https://www.facebook.com/events/1580292636443073"
   },
   {
@@ -2441,7 +2441,7 @@
     "earlyBirdFee": null,
     "website": null,
     "tags": "Marathon, Running",
-    "responseCount": 4100,
+    "responseCount": 5400,
     "fbLink": "https://www.facebook.com/events/2785523131781078"
   },
   {
@@ -2453,7 +2453,7 @@
     "earlyBirdFee": null,
     "website": null,
     "tags": "Running",
-    "responseCount": 4100,
+    "responseCount": 5400,
     "fbLink": "https://www.facebook.com/events/2785523131781078"
   },
   {
@@ -2465,7 +2465,7 @@
     "earlyBirdFee": null,
     "website": null,
     "tags": "Running",
-    "responseCount": 4100,
+    "responseCount": 5400,
     "fbLink": "https://www.facebook.com/events/2785523131781078"
   },
   {
@@ -2477,7 +2477,7 @@
     "earlyBirdFee": null,
     "website": null,
     "tags": "Kids Run, Running",
-    "responseCount": 4100,
+    "responseCount": 5400,
     "fbLink": "https://www.facebook.com/events/2785523131781078"
   },
   {
@@ -2501,7 +2501,7 @@
     "earlyBirdFee": null,
     "website": null,
     "tags": "Marathon, Running",
-    "responseCount": 2300,
+    "responseCount": 2400,
     "fbLink": "https://www.facebook.com/events/25923606837328023"
   },
   {
@@ -2513,7 +2513,7 @@
     "earlyBirdFee": null,
     "website": null,
     "tags": "Half Marathon, Running",
-    "responseCount": 2300,
+    "responseCount": 2400,
     "fbLink": "https://www.facebook.com/events/25923606837328023"
   },
   {
@@ -2525,7 +2525,7 @@
     "earlyBirdFee": null,
     "website": null,
     "tags": "Running",
-    "responseCount": 2300,
+    "responseCount": 2400,
     "fbLink": "https://www.facebook.com/events/25923606837328023"
   },
   {
@@ -2537,7 +2537,7 @@
     "earlyBirdFee": 1749,
     "website": "https://register.run-bangla.com/",
     "tags": "Marathon, Running, AIMS",
-    "responseCount": 4300,
+    "responseCount": 4800,
     "fbLink": "https://www.facebook.com/events/877143868098350"
   },
   {
@@ -2549,7 +2549,7 @@
     "earlyBirdFee": 1549,
     "website": "https://register.run-bangla.com/",
     "tags": "Half Marathon, Running, AIMS",
-    "responseCount": 4300,
+    "responseCount": 4800,
     "fbLink": "https://www.facebook.com/events/877143868098350"
   },
   {
@@ -2561,7 +2561,7 @@
     "earlyBirdFee": 1349,
     "website": "https://register.run-bangla.com/",
     "tags": "Running, AIMS",
-    "responseCount": 4300,
+    "responseCount": 4800,
     "fbLink": "https://www.facebook.com/events/877143868098350"
   },
   {
@@ -2573,7 +2573,7 @@
     "earlyBirdFee": 1199,
     "website": "https://register.run-bangla.com/",
     "tags": "Fun Run, Running, AIMS",
-    "responseCount": 4300,
+    "responseCount": 4800,
     "fbLink": "https://www.facebook.com/events/877143868098350"
   },
   {
@@ -2582,10 +2582,10 @@
     "distance": 15,
     "location": "Hatirjheel Amphitheater, Dhaka",
     "fee": 1211,
-    "earlyBirdFee": 999,
-    "website": "https://theathletex.net/register/15/two",
+    "earlyBirdFee": null,
+    "website": "https://theathletex.net/events/pink-run-2026",
     "tags": "Breast Cancer Awareness, Running",
-    "responseCount": 4400,
+    "responseCount": 4600,
     "fbLink": "https://www.facebook.com/events/4302421213353095"
   },
   {
@@ -2594,10 +2594,10 @@
     "distance": 7.5,
     "location": "Hatirjheel Amphitheater, Dhaka",
     "fee": 1111,
-    "earlyBirdFee": 899,
-    "website": "https://theathletex.net/register/15/two",
+    "earlyBirdFee": null,
+    "website": "https://theathletex.net/events/pink-run-2026",
     "tags": "Breast Cancer Awareness, Running",
-    "responseCount": 4400,
+    "responseCount": 4600,
     "fbLink": "https://www.facebook.com/events/4302421213353095"
   },
   {
@@ -2606,10 +2606,10 @@
     "distance": 1,
     "location": "Hatirjheel Amphitheater, Dhaka",
     "fee": 1011,
-    "earlyBirdFee": 799,
-    "website": "https://theathletex.net/register/15/two",
+    "earlyBirdFee": null,
+    "website": "https://theathletex.net/events/pink-run-2026",
     "tags": "Breast Cancer Awareness, Running",
-    "responseCount": 4400,
+    "responseCount": 4600,
     "fbLink": "https://www.facebook.com/events/4302421213353095"
   },
   {
@@ -2619,9 +2619,9 @@
     "location": "Mohiskhola, Madhanagar, Sunamganj",
     "fee": 4500,
     "earlyBirdFee": null,
-    "website": "https://theathletex.net/register/13/two",
+    "website": "https://theathletex.net/events/the-athlete-x-ultra-2026",
     "tags": "Ultra Trail, Trail Running, Running",
-    "responseCount": 2400,
+    "responseCount": 2500,
     "fbLink": "https://www.facebook.com/events/1190198942555911"
   },
   {
@@ -2631,9 +2631,9 @@
     "location": "Mohiskhola, Madhanagar, Sunamganj",
     "fee": 4990,
     "earlyBirdFee": null,
-    "website": "https://theathletex.net/register/13/two",
+    "website": "https://theathletex.net/events/the-athlete-x-ultra-2026",
     "tags": "Ultra Trail, Trail Running, Running",
-    "responseCount": 2400,
+    "responseCount": 2500,
     "fbLink": "https://www.facebook.com/events/1190198942555911"
   },
   {
@@ -2643,45 +2643,81 @@
     "location": "Mohiskhola, Madhanagar, Sunamganj",
     "fee": 5990,
     "earlyBirdFee": null,
-    "website": "https://theathletex.net/register/13/two",
+    "website": "https://theathletex.net/events/the-athlete-x-ultra-2026",
     "tags": "Ultra Trail, Trail Running, Running",
-    "responseCount": 2400,
+    "responseCount": 2500,
     "fbLink": "https://www.facebook.com/events/1190198942555911"
   },
   {
     "name": "Kuakata Half Marathon 2026 | 21.1k",
-    "date": "17 Oct 2026",
+    "date": "24 Oct 2026",
     "distance": 21.1,
     "location": "Kuakata Sea Beach, Patuakhali",
     "fee": null,
     "earlyBirdFee": null,
-    "website": "https://theathletex.net/register/12/two",
+    "website": "https://theathletex.net/events/kuakata-half-marathon-2026",
     "tags": "Half Marathon, Running",
-    "responseCount": 685,
+    "responseCount": 782,
     "fbLink": "https://www.facebook.com/events/1730454554535385"
   },
   {
     "name": "Kuakata Half Marathon 2026 | 10k",
-    "date": "17 Oct 2026",
+    "date": "24 Oct 2026",
     "distance": 10,
     "location": "Kuakata Sea Beach, Patuakhali",
     "fee": null,
     "earlyBirdFee": null,
-    "website": "https://theathletex.net/register/12/two",
+    "website": "https://theathletex.net/events/kuakata-half-marathon-2026",
     "tags": "Running",
-    "responseCount": 685,
+    "responseCount": 782,
     "fbLink": "https://www.facebook.com/events/1730454554535385"
   },
   {
-    "name": "Run For The Earth 2026",
+    "name": "Run For The Earth 2026 | 21.1k",
     "date": "18 Dec 2026",
-    "distance": null,
+    "distance": 21.1,
     "location": "Hatirjheel, Dhaka",
     "fee": null,
     "earlyBirdFee": null,
-    "website": "https://theathletex.net",
+    "website": "https://theathletex.net/events/run-for-the-earth-2026",
+    "tags": "Half Marathon, Running",
+    "responseCount": 3000,
+    "fbLink": "https://www.facebook.com/events/1926216974990420"
+  },
+  {
+    "name": "Run For The Earth 2026 | 15k",
+    "date": "18 Dec 2026",
+    "distance": 15,
+    "location": "Hatirjheel, Dhaka",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": "https://theathletex.net/events/run-for-the-earth-2026",
     "tags": "Running",
-    "responseCount": 2800,
+    "responseCount": 3000,
+    "fbLink": "https://www.facebook.com/events/1926216974990420"
+  },
+  {
+    "name": "Run For The Earth 2026 | 7.5k",
+    "date": "18 Dec 2026",
+    "distance": 7.5,
+    "location": "Hatirjheel, Dhaka",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": "https://theathletex.net/events/run-for-the-earth-2026",
+    "tags": "Running",
+    "responseCount": 3000,
+    "fbLink": "https://www.facebook.com/events/1926216974990420"
+  },
+  {
+    "name": "Run For The Earth 2026 | 1k",
+    "date": "18 Dec 2026",
+    "distance": 1,
+    "location": "Hatirjheel, Dhaka",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": "https://theathletex.net/events/run-for-the-earth-2026",
+    "tags": "Fun Run, Running",
+    "responseCount": 3000,
     "fbLink": "https://www.facebook.com/events/1926216974990420"
   },
   {
@@ -2753,7 +2789,7 @@
     "earlyBirdFee": 1500,
     "website": "https://activepulsebd.com/event/apcm2026/",
     "tags": "Marathon, Running",
-    "responseCount": 3400,
+    "responseCount": 3600,
     "fbLink": "https://www.facebook.com/events/1235426018066609"
   },
   {
@@ -2765,7 +2801,7 @@
     "earlyBirdFee": 1350,
     "website": "https://activepulsebd.com/event/apcm2026/",
     "tags": "Half Marathon, Running",
-    "responseCount": 3400,
+    "responseCount": 3600,
     "fbLink": "https://www.facebook.com/events/1235426018066609"
   },
   {
@@ -2777,7 +2813,7 @@
     "earlyBirdFee": 1250,
     "website": "https://activepulsebd.com/event/apcm2026/",
     "tags": "Running",
-    "responseCount": 3400,
+    "responseCount": 3600,
     "fbLink": "https://www.facebook.com/events/1235426018066609"
   },
   {
@@ -2789,19 +2825,19 @@
     "earlyBirdFee": 1150,
     "website": "https://activepulsebd.com/event/apcm2026/",
     "tags": "Fun Run, Running",
-    "responseCount": 3400,
+    "responseCount": 3600,
     "fbLink": "https://www.facebook.com/events/1235426018066609"
   },
   {
-    "name": "Chunati. com Marathon 2026 - 5th Edition",
+    "name": "Chunati. com Marathon 2026 – 5th Edition",
     "date": "18 Dec 2026",
     "distance": null,
-    "location": "Chunati Meherunnesa Secondary School",
+    "location": "Ishak Mia Sarak, Chunati, Lohagara, Chattogram",
     "fee": null,
     "earlyBirdFee": null,
     "website": null,
     "tags": "Marathon, Running",
-    "responseCount": 345,
+    "responseCount": 441,
     "fbLink": "https://www.facebook.com/events/1352357900103667"
   },
   {
@@ -2832,24 +2868,24 @@
     "name": "ActivePulse Women's Run : Season 3 | 7.3k",
     "date": "15 Jan 2027",
     "distance": 7.3,
-    "location": "Hatirjheel - হাতিরঝিল",
-    "fee": null,
-    "earlyBirdFee": null,
+    "location": "Hatirjheel Amphitheatre, Dhaka",
+    "fee": 1350,
+    "earlyBirdFee": 1150,
     "website": "https://activepulsebd.com/product/apwr3/",
     "tags": "Running",
-    "responseCount": 1800,
+    "responseCount": 1900,
     "fbLink": "https://www.facebook.com/events/1489083132744161"
   },
   {
     "name": "ActivePulse Women's Run : Season 3 | 2k",
     "date": "15 Jan 2027",
     "distance": 2,
-    "location": "Hatirjheel - হাতিরঝিল",
-    "fee": null,
-    "earlyBirdFee": null,
+    "location": "Hatirjheel Amphitheatre, Dhaka",
+    "fee": 1300,
+    "earlyBirdFee": 1100,
     "website": "https://activepulsebd.com/product/apwr3/",
-    "tags": "Running",
-    "responseCount": 1800,
+    "tags": "Fun Run, Running",
+    "responseCount": 1900,
     "fbLink": "https://www.facebook.com/events/1489083132744161"
   },
   {
@@ -3036,24 +3072,36 @@
     "name": "Dhaka 25k 2027 | 4th Edition | 25k",
     "date": "29 Jan 2027",
     "distance": 25,
-    "location": "Hatirjheel - হাতিরঝিল",
+    "location": "Hatirjheel, Dhaka",
     "fee": null,
     "earlyBirdFee": null,
     "website": "https://www.dhaka25k.com",
     "tags": "AIMS, Running",
-    "responseCount": 1400,
+    "responseCount": 1800,
     "fbLink": "https://www.facebook.com/events/971814489193469"
   },
   {
     "name": "Dhaka 25k 2027 | 4th Edition | 10k",
     "date": "29 Jan 2027",
     "distance": 10,
-    "location": "Hatirjheel - হাতিরঝিল",
+    "location": "Hatirjheel, Dhaka",
     "fee": null,
     "earlyBirdFee": null,
     "website": "https://www.dhaka25k.com",
     "tags": "AIMS, Running",
-    "responseCount": 1400,
+    "responseCount": 1800,
+    "fbLink": "https://www.facebook.com/events/971814489193469"
+  },
+  {
+    "name": "Dhaka 25k 2027 | 4th Edition | 3k",
+    "date": "29 Jan 2027",
+    "distance": 3,
+    "location": "Hatirjheel, Dhaka",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": "https://www.dhaka25k.com",
+    "tags": "Kids Run, Running",
+    "responseCount": 1800,
     "fbLink": "https://www.facebook.com/events/971814489193469"
   },
   {
@@ -3103,5 +3151,137 @@
     "tags": "Running, AIMS",
     "responseCount": 1800,
     "fbLink": "https://www.facebook.com/events/1323309932989078"
+  },
+  {
+    "name": "SUST Half Marathon 2027 | 21.1k",
+    "date": "15 Jan 2027",
+    "distance": 21.1,
+    "location": "Shahjalal University of Science and Tecnology, Sylhet, Sylhet Division",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Half Marathon, Running",
+    "responseCount": 979,
+    "fbLink": "https://www.facebook.com/events/1061943096246909"
+  },
+  {
+    "name": "SUST Half Marathon 2027 | 7.5k",
+    "date": "15 Jan 2027",
+    "distance": 7.5,
+    "location": "Shahjalal University of Science and Tecnology, Sylhet, Sylhet Division",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Running",
+    "responseCount": 979,
+    "fbLink": "https://www.facebook.com/events/1061943096246909"
+  },
+  {
+    "name": "Moglabazar 10K Run 2026 | 10k",
+    "date": "27 Nov 2026",
+    "distance": 10,
+    "location": "Rebatiraman High School Field, Moglabazar, Dakshin Surma, Sylhet",
+    "fee": 700,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Running",
+    "responseCount": 172,
+    "fbLink": "https://www.facebook.com/events/1141149261644964"
+  },
+  {
+    "name": "Dhaka University Arts Faculty Unity Run 2026 | 10k",
+    "date": "14 Nov 2026",
+    "distance": 10,
+    "location": "Dhaka University Campus",
+    "fee": 999,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Running",
+    "responseCount": 508,
+    "fbLink": "https://www.facebook.com/events/1375670681341299"
+  },
+  {
+    "name": "Dhaka University Arts Faculty Unity Run 2026 | 5k",
+    "date": "14 Nov 2026",
+    "distance": 5,
+    "location": "Dhaka University Campus",
+    "fee": 999,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Running",
+    "responseCount": 508,
+    "fbLink": "https://www.facebook.com/events/1375670681341299"
+  },
+  {
+    "name": "GEN-Z Runners LEGACY CHALLENGE",
+    "date": "20 Aug 2026",
+    "distance": null,
+    "location": "Online event",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Virtual Run, Running",
+    "responseCount": 59,
+    "fbLink": "https://www.facebook.com/events/1497702565736402"
+  },
+  {
+    "name": "RunRise Nation Noboborsho Run 1434 (Edition-3) | 1.3k",
+    "date": "16 Apr 2027",
+    "distance": 1.3,
+    "location": "Hatirjheel Amphitheatre, Dhaka",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Fun Run, Running",
+    "responseCount": 269,
+    "fbLink": "https://www.facebook.com/events/2185873572345047"
+  },
+  {
+    "name": "RunRise Nation Noboborsho Run 1434 (Edition-3) | 7.3k",
+    "date": "16 Apr 2027",
+    "distance": 7.3,
+    "location": "Hatirjheel Amphitheatre, Dhaka",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Running",
+    "responseCount": 269,
+    "fbLink": "https://www.facebook.com/events/2185873572345047"
+  },
+  {
+    "name": "RunRise Nation Noboborsho Run 1434 (Edition-3) | 14.3k",
+    "date": "16 Apr 2027",
+    "distance": 14.3,
+    "location": "Hatirjheel Amphitheatre, Dhaka",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Running",
+    "responseCount": 269,
+    "fbLink": "https://www.facebook.com/events/2185873572345047"
+  },
+  {
+    "name": "EASTERN ULTRA",
+    "date": "19 Mar 2027",
+    "distance": null,
+    "location": "Bijoynagar, Brahmanbaria",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Ultra Running, Running",
+    "responseCount": 155,
+    "fbLink": "https://www.facebook.com/events/4597962830419367"
+  },
+  {
+    "name": "BRAHMANBARIA HALF MARATHON-2027(S-4)",
+    "date": "16 Jan 2027",
+    "distance": null,
+    "location": "Brahmanbaria",
+    "fee": null,
+    "earlyBirdFee": null,
+    "website": null,
+    "tags": "Half Marathon, Running",
+    "responseCount": 403,
+    "fbLink": "https://www.facebook.com/events/963932123098263"
   }
 ]

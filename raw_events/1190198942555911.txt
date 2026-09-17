@@ -32,11 +32,11 @@ Sunamganj, Sylhet
 The Athlete X Ultra 2026
 Invite
 Details
-2.4K people responded
+2.5K people responded
 Event by The Athlete X and The Athlete X Ultra
 Sunamganj, Sylhet
 Tickets
-theathletex.net/register/13/two
+theathletex.net/events/the-athlete-x-ultra-2026
 Public
  
  · Anyone on or off Facebook
@@ -114,7 +114,7 @@ Dhaka, Bangladesh
 Tickets
 Find tickets
 Sunamganj, Sylhet
-Dhaka
+23.739140, 90.406489
 Hosts
 The Athlete X
 The Athlete X Ultra
